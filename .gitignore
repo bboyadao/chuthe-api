@@ -1,0 +1,6 @@
+*.pyc
+storage/*
+__pycache__/
+.idea/
+**/local.py
+*.sqlite3

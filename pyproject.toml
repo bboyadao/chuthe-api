@@ -1,0 +1,84 @@
+[tool.poetry]
+name = "chuthe"
+version = "0.0.0"
+description = "chuthe api"
+authors = ["bboyadao <anh.nguyen@pdsolution.vn>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.0.2"
+gunicorn = "^20.1.0"
+djangorestframework = "^3.13.1"
+psycopg2-binary = "^2.9.3"
+celery = {extras = ["amqp"], version = "^5.2.3"}
+django-celery-results = "^2.3.0"
+daphne = "^3.0.2"
+django-stubs = "^1.9.0"
+Markdown = "^3.3.6"
+django-filter = "^21.1"
+flakehell = "^0.9.0"
+ipython = "^8.2.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+mypy = "^0.942"
+pre-commit = "^2.17.0"
+autoflake = "^1.4"
+autoimport = "^1.2.2"
+autopep8 = "^1.6.0"
+reorder-python-imports = "^3.0.1"
+yapf = "^0.32.0"
+pylint = "^2.13.0"
+djangorestframework-stubs = "^1.4.0"
+
+[tool.pyright]
+include = ["./"]
+exclude = ["**/node_modules",
+    "**/__pycache__",
+    "src/experimental",
+    "src/typestubs"
+]
+ignore = ["src/oldstuff"]
+stubPath = "./stubs"
+# venv = "$env{VIRTUAL_ENV}"
+
+reportMissingImports = true
+reportMissingTypeStubs = false
+
+pythonVersion = "3.10"
+pythonPlatform = "Linux"
+
+executionEnvironments = [
+  # { root = "src/web", pythonVersion = "3.5", pythonPlatform = "Windows", extraPaths = [ "src/service_libs" ] },
+  # { root = "src/sdk", pythonVersion = "3.0", extraPaths = [ "src/backend" ] },
+  # { root = "src/tests", extraPaths = ["src/tests/e2e", "src/sdk" ]},
+  { root = "./" }
+]
+
+[tool.mypy]
+plugins = [
+"mypy_django_plugin.main",
+"mypy_drf_plugin.main",
+]
+
+[tool.django-stubs]
+django_settings_module = "chuthe.settings"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# list of plugins and rules for them
+[tool.flakehell.plugins]
+# include everything in pyflakes except F401
+pyflakes = ["+*", "-F401"]
+# enable only codes from S100 to S199
+flake8-bandit = ["-*", "+S1??"]
+# enable everything that starts from `flake8-`
+"flake8-*" = ["+*"]
+# explicitly disable plugin
+flake8-docstrings = ["-*"]
+# 80 chars limit isn't enough in 21 century
+max_line_length = 120
