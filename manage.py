@@ -25,4 +25,4 @@ if __name__ == '__main__':
     if env:
         main(env.lower())
     else:
-        raise EnvironmentError("PLEASE EXPORT YOUR ENV: {envs}")
+        raise EnvironmentError(f"PLEASE EXPORT YOUR ENV: {envs}")
