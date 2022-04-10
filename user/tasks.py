@@ -6,4 +6,3 @@ def test_user():
     "AAAAA"
     print("plplplplp")
     return 1
-

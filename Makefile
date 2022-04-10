@@ -5,5 +5,7 @@ b:
 	docker tag chuthe:latest 0x7c/chuthe:latest
 p:
 	docker push 0x7c/chuthe
-run:
+r:
 	python manage.py runserver
+m:
+	python manage.py migrate

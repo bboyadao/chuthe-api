@@ -14,6 +14,7 @@ CELERY_CACHE_BACKEND = "default"
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_ENABLE_UTC = True
+CELERY_RESULT_BACKEND = "django-db"
 DJANGO_CELERY_RESULTS_TASK_ID_MAX_LENGTH = 191
 
 ALLOWED_HOSTS = ["*"]
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "user.apps.UserConfig",
     "django_celery_results",
+    "django_celery_beat",
 ]
 AUTH_USER_MODEL = "user.User"
 MIDDLEWARE = [
