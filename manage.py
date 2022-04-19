@@ -3,7 +3,6 @@
 import os
 import sys
 
-
 def main(env):
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'chuthe.settings.{env}')
@@ -18,11 +17,11 @@ def main(env):
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
-    envs = ["PROD", "STAGING", "DEV", "LOCAL"]
+if __name__ == "__main__":
+    envs = ( "PROD", "STAGING", "DEV", "LOCAL" )
 
     env = os.getenv("CHUTHE_ENV")
-    if env:
+    if env and env in envs:
         main(env.lower())
     else:
-        raise EnvironmentError(f"PLEASE EXPORT YOUR ENV: {envs}")
+        raise EnvironmentError(f"PLEASE EXPORT YOUR ENV 'CHUTHE_ENV': {envs}")
