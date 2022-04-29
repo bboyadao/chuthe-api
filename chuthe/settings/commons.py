@@ -25,6 +25,7 @@ ALLOWED_HOSTS = ["*"]
 APPEND_SLASH = True
 
 EXTERNAL_APPS = [
+    "rest_framework",
     "oauth2_provider",
     "django_celery_results",
     "django_celery_beat",
@@ -43,6 +44,7 @@ DJANGO_APPS = [
 
 INTERNAL_APPS = [
     "user.apps.UserConfig",
+    "apps.apps.AppsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS
