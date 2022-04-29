@@ -21,6 +21,10 @@ ipython = "^8.2.0"
 whitenoise = "^6.0.0"
 django-celery-beat = "^2.2.1"
 pylint = "^2.13.5"
+django-oauth-toolkit = "^2.0.0"
+drf-spectacular = "^0.22.1"
+drf-spectacular-sidecar = "^2022.4.1"
+djangorestframework-stubs = "^1.5.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
@@ -67,6 +71,9 @@ plugins = [
 ]
 
 [tool.django-stubs]
+django_settings_module = "chuthe.settings"
+
+[tool.django-drf-stubs]
 django_settings_module = "chuthe.settings"
 
 [build-system]

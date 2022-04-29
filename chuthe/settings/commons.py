@@ -6,8 +6,12 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+PROJECT_NAME = "chuthe"
+
 ENVS = ["PROD", "STAGING", "DEV", "LOCAL"]
+
 ENV = os.environ.get("CHUTHE_ENV")
+
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 CELERY_CACHE_BACKEND = "default"
@@ -18,19 +22,33 @@ CELERY_RESULT_BACKEND = "django-db"
 DJANGO_CELERY_RESULTS_TASK_ID_MAX_LENGTH = 191
 
 ALLOWED_HOSTS = ["*"]
+APPEND_SLASH = True
 
-INSTALLED_APPS = [
+EXTERNAL_APPS = [
+    "oauth2_provider",
+    "django_celery_results",
+    "django_celery_beat",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
+]
+
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "user.apps.UserConfig",
-    "django_celery_results",
-    "django_celery_beat",
 ]
+
+INTERNAL_APPS = [
+    "user.apps.UserConfig",
+]
+
+INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS
+
 AUTH_USER_MODEL = "user.User"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -105,3 +123,23 @@ STATIC_ROOT = os.path.join(STORAGE_DIR, "staticfiles")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+
+SPECTACULAR_SETTINGS = {
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+    # OTHER SETTINGS
+}
