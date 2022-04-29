@@ -3,7 +3,7 @@
 import os
 import sys
 from celery import Celery
-PROJECT_NAME = "chuthe"
+from chuthe.settings.commons import PROJECT_NAME
 
 env = os.getenv("CHUTHE_ENV")
 if env is None:
