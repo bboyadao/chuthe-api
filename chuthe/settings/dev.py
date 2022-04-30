@@ -1,1 +1,1 @@
-from .commons import *
+from .commons import *  # noqa
