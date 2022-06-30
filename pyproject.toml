@@ -6,7 +6,6 @@ authors = ["bboyadao <anh.nguyen@pdsolution.vn>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-Django = "3.2"
 gunicorn = "^20.1.0"
 djangorestframework = "^3.13.1"
 psycopg2-binary = "^2.9.3"
@@ -25,6 +24,7 @@ django-oauth-toolkit = "^2.0.0"
 drf-spectacular = "^0.22.1"
 drf-spectacular-sidecar = "^2022.4.1"
 djangorestframework-stubs = "^1.5.0"
+Django = "4.0.5"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
