@@ -45,6 +45,7 @@ DJANGO_APPS = [
 INTERNAL_APPS = [
     "user.apps.UserConfig",
     "apps.apps.AppsConfig",
+    "company.apps.AppsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS

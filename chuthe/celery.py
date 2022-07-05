@@ -1,5 +1,3 @@
-"ooooo"
-
 import os
 import sys
 from celery import Celery
@@ -21,8 +19,8 @@ app = Celery(PROJECT_NAME)
 app.config_from_object("django.conf:settings")
 app.autodiscover_tasks()
 
+
 @app.task(bind=True)
 def debug_task(self):
-    "AAAAA"
 
     print(f"Request: {self.request!r}")
