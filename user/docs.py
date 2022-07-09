@@ -1,5 +1,6 @@
 from drf_spectacular.utils import extend_schema, OpenApiExample
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext as _
+
 
 
 TAG = "User View"

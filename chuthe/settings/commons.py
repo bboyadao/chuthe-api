@@ -24,61 +24,71 @@ DJANGO_CELERY_RESULTS_TASK_ID_MAX_LENGTH = 191
 ALLOWED_HOSTS = ["*"]
 APPEND_SLASH = True
 
-EXTERNAL_APPS = [
-    "rest_framework",
-    "oauth2_provider",
-    "django_celery_results",
-    "django_celery_beat",
-    "drf_spectacular",
-    "drf_spectacular_sidecar",
+AUTH_APPS = [
+	"rest_framework.authtoken",
+	"dj_rest_auth",
+	"allauth",
+	"allauth.account",
+	"dj_rest_auth.registration",
+	"allauth.socialaccount",
+	"allauth.socialaccount.providers.facebook",
 ]
 
+EXTERNAL_APPS = [
+	"rest_framework",
+	"oauth2_provider",
+	"django_celery_results",
+	"django_celery_beat",
+	"drf_spectacular",
+	"drf_spectacular_sidecar",
+	"phonenumber_field",
+	"corsheaders"
+] + AUTH_APPS
+
 DJANGO_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+	"django.contrib.admin",
+	"django.contrib.auth",
+	"django.contrib.contenttypes",
+	"django.contrib.sessions",
+	"django.contrib.messages",
+	"django.contrib.staticfiles",
 ]
 
 INTERNAL_APPS = [
-    "user.apps.UserConfig",
-    "apps.apps.AppsConfig",
-    "company.apps.AppsConfig",
+	"user.apps.UserConfig",
+	"apps.apps.AppsConfig",
+	"company.apps.CompanyConfig",
 ]
-
-INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS
 
 AUTH_USER_MODEL = "user.User"
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+	"django.middleware.security.SecurityMiddleware",
+	"whitenoise.middleware.WhiteNoiseMiddleware",
+	"django.contrib.sessions.middleware.SessionMiddleware",
+	"django.middleware.common.CommonMiddleware",
+	"django.middleware.csrf.CsrfViewMiddleware",
+	"django.contrib.auth.middleware.AuthenticationMiddleware",
+	"django.contrib.messages.middleware.MessageMiddleware",
+	"django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "chuthe.urls"
 
 TEMPLATES = [
-    {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
-            ],
-        },
-    },
+	{
+		"BACKEND": "django.template.backends.django.DjangoTemplates",
+		"DIRS": [],
+		"APP_DIRS": True,
+		"OPTIONS": {
+			"context_processors": [
+				"django.template.context_processors.debug",
+				"django.template.context_processors.request",
+				"django.contrib.auth.context_processors.auth",
+				"django.contrib.messages.context_processors.messages",
+			],
+		},
+	},
 ]
 
 WSGI_APPLICATION = "chuthe.wsgi.application"
@@ -86,29 +96,29 @@ WSGI_APPLICATION = "chuthe.wsgi.application"
 STORAGE_DIR = "storage"
 
 CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
-        "LOCATION": "django_cache",
-    }
+	"default": {
+		"BACKEND": "django.core.cache.backends.db.DatabaseCache",
+		"LOCATION": "django_cache",
+	}
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME":
-        "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME":
-        "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME":
-        "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME":
-        "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+	{
+		"NAME":
+			"django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+	},
+	{
+		"NAME":
+			"django.contrib.auth.password_validation.MinimumLengthValidator",
+	},
+	{
+		"NAME":
+			"django.contrib.auth.password_validation.CommonPasswordValidator",
+	},
+	{
+		"NAME":
+			"django.contrib.auth.password_validation.NumericPasswordValidator",
+	},
 ]
 
 LANGUAGE_CODE = "en-us"
@@ -128,18 +138,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-}
-
-
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your Project API',
-    'DESCRIPTION': 'Your project description',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-    # OTHER SETTINGS
+	'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SPECTACULAR_SETTINGS = {
-    'REDOC_DIST': 'SIDECAR',
+	'TITLE': 'Your Project API',
+	'DESCRIPTION': 'Your project description',
+	'VERSION': '1.0.0',
+	'SERVE_INCLUDE_SCHEMA': False,
+	# OTHER SETTINGS
+	'REDOC_DIST': 'SIDECAR',
 }

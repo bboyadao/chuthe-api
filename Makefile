@@ -1,4 +1,7 @@
 init:
+	export CHUCHUTHE_ENV="LOCAL"
+
+mock:
 	python manage.py shell < user/mocks.py
 	python manage.py shell < heo/mocks.py
 b:
@@ -11,7 +14,7 @@ r:
 	python manage.py runserver
 
 ru:
-	python manage.py runserver_plus 0.0.0.0:8000
+	python manage.py runserver_plus 0.0.0.0:8000 --keep-meta-shutdown
 
 sh:
 	python manage.py shell_plus
@@ -22,7 +25,6 @@ cl:
 	find . -path "*/migrations/*.pyc"  -delete
 mk:
 	python manage.py makemigrations
+
 mi:
 	python manage.py migrate
-
-
