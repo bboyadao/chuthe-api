@@ -3,9 +3,10 @@
 import os
 import sys
 
-def main(env):
+
+def main(_env):
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'chuthe.settings.{env}')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'chuthe.settings.{_env}')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -18,10 +19,9 @@ def main(env):
 
 
 if __name__ == "__main__":
-    envs = ( "PROD", "STAGING", "DEV", "LOCAL" )
 
-    env = os.getenv("CHUTHE_ENV")
-    if env and env in envs:
+    env = os.getenv("CHUTHE_ENV", False)
+    if env:
         main(env.lower())
     else:
-        raise EnvironmentError(f"PLEASE EXPORT YOUR ENV 'CHUTHE_ENV': {envs}")
+        raise EnvironmentError(f'PLEASE EXPORT YOUR ENV `CHUTHE_ENV: ["PROD", "STAGING", "DEV", "LOCAL"]`')
