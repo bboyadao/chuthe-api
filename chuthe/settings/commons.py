@@ -144,11 +144,14 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-        'drf_social_oauth2.authentication.SocialAuthentication',
     ]
 }
 REST_USE_JWT = True
+
+
+AUTHENTICATION_BACKENDS = [
+    "user.auth.EmailBackend"
+]
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Your Project API',
