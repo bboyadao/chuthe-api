@@ -31,6 +31,7 @@ phonenumbers = "^8.12.51"
 dj-rest-auth = "^2.2.4"
 django-cors-headers = "^3.13.0"
 django-allauth = "^0.51.0"
+djangorestframework-simplejwt = "^5.2.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
