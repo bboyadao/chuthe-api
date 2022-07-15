@@ -143,20 +143,21 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ]
 }
 REST_USE_JWT = True
 
-
 AUTHENTICATION_BACKENDS = [
-    "user.auth.EmailBackend"
+    "user.auth.ChutheAuth"
 ]
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your Project API',
-    'DESCRIPTION': 'Your project description',
-    'VERSION': '1.0.0',
+    'TITLE': "ChuThe's Api Documents",
+    'DESCRIPTION': "This describe specs i/o modules only for internal team.",
+    'VERSION': '0.1.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
     'REDOC_DIST': 'SIDECAR',

@@ -14,3 +14,8 @@ class AnonThrottle(AnonRateThrottle):
 class AnonRegThrottle(AnonRateThrottle):
 	scope = "anon_reg"
 	rate = "10/day"
+
+
+class FreeBehavior(UserThrottle):
+	scope = "free"
+	rate = "1_000_000/day"

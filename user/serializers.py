@@ -19,3 +19,12 @@ class RegSer(serializers.ModelSerializer, serializers.Serializer):
     def create(self, validated_data):
         pass
 
+
+class MeSer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ["password",
+                   "is_superuser",
+                   "is_staff",
+                   "date_joined",
+                   "user_permissions"]
