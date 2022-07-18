@@ -155,6 +155,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SPECTACULAR_SETTINGS = {
+    "PREPROCESSING_HOOKS": ["docs.preprocessing_filter_spec"],
+
     'TITLE': "ChuThe's Api Documents",
     'DESCRIPTION': "This describe specs i/o modules only for internal team.",
     'VERSION': '0.1.0',
