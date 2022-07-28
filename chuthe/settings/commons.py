@@ -3,6 +3,8 @@ This is the common settings for project.
 """
 import os
 from pathlib import Path
+from django.urls import reverse_lazy
+
 
 SITE_ID = 1
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +25,6 @@ CELERY_RESULT_BACKEND = "django-db"
 DJANGO_CELERY_RESULTS_TASK_ID_MAX_LENGTH = 191
 
 ALLOWED_HOSTS = ["*"]
-APPEND_SLASH = True
 
 AUTH_APPS = [
     "oauth2_provider",
@@ -155,12 +156,11 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SPECTACULAR_SETTINGS = {
-    "PREPROCESSING_HOOKS": ["docs.preprocessing_filter_spec"],
-
+    "PREPROCESSING_HOOKS": ["docs.hooks.preprocessing_filter_spec"],
     'TITLE': "ChuThe's Api Documents",
     'DESCRIPTION': "This describe specs i/o modules only for internal team.",
     'VERSION': '0.1.0',
     'SERVE_INCLUDE_SCHEMA': False,
-    # OTHER SETTINGS
     'REDOC_DIST': 'SIDECAR',
+    "EXCLUDE_PATH": [reverse_lazy("schema")],
 }
