@@ -1,9 +1,6 @@
 init:
 	export CHUCHUTHE_ENV="LOCAL"
 
-mock:
-	python manage.py shell < user/mocks.py
-	python manage.py shell < heo/mocks.py
 b:
 	docker build -t chuthe:latest -f Dockerfile .
 	docker tag chuthe:latest 0x7c/chuthe:latest
@@ -34,3 +31,9 @@ cac:
 
 su:
 	echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@gmail.com', 'admin123')" | python manage.py shell
+
+mock:
+	python manage.py mock_alias
+#	python manage.py shell < user/mocks.py
+#	python manage.py shell < heo/mocks.py
+

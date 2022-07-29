@@ -18,6 +18,10 @@ class User(AbstractUser):
     # USERNAME_FIELD = 'email'
     # REQUIRED_FIELDS = ['username']
 
+    def delete(self, using=None, keep_parents=False):
+        self.is_active = False
+        self.save()
+
 # class LANGS(models.TextChoices):
 #     def __init__(self):
     #         sorted(setattr(self.item = item) for item in zoneinfo.available_timezones())

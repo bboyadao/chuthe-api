@@ -1,4 +1,4 @@
-from rest_framework import fields, serializers
+from rest_framework import serializers
 
 from user.models import User
 
@@ -28,3 +28,12 @@ class MeSer(serializers.ModelSerializer):
                    "is_staff",
                    "date_joined",
                    "user_permissions"]
+
+
+class UserUpdateSer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "phone",
+            "email",
+        ]
