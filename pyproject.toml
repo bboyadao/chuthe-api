@@ -9,7 +9,7 @@ python = "^3.10"
 gunicorn = "^20.1.0"
 djangorestframework = "^3.13.1"
 psycopg2-binary = "^2.9.3"
-celery = {extras = ["amqp"], version = "^5.2.3"}
+celery = { extras = ["amqp"], version = "^5.2.3" }
 django-celery-results = "^2.3.0"
 daphne = "^3.0.2"
 django-stubs = "^1.9.0"
@@ -21,13 +21,13 @@ whitenoise = "^6.0.0"
 django-celery-beat = "^2.2.1"
 pylint = "^2.14.5"
 django-oauth-toolkit = "^2.0.0"
-drf-spectacular = "^0.22.1"
+drf-spectacular = "^0.23.1"
 drf-spectacular-sidecar = "^2022.4.1"
 djangorestframework-stubs = "^1.7.0"
 Django = "4.0.5"
 coverage = "^6.4.2"
 django-phonenumber-field = "^6.3.0"
-phonenumbers = "^8.12.51"
+phonenumbers = "^8.12.52"
 dj-rest-auth = "^2.2.5"
 django-cors-headers = "^3.13.0"
 django-allauth = "^0.51.0"
@@ -35,14 +35,14 @@ djangorestframework-simplejwt = "^5.2.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
-flake8 = "^4.0.1"
+flake8 = "^5.0.0"
 isort = "^5.10.1"
-mypy = "^0.961"
+mypy = "^0.971"
 pre-commit = "^2.20.0"
 autoflake = "^1.4"
 autoimport = "^1.2.2"
 autopep8 = "^1.6.0"
-reorder-python-imports = "^3.8.1"
+reorder-python-imports = "^3.8.2"
 yapf = "^0.32.0"
 pylint = "^2.14.5"
 djangorestframework-stubs = "^1.7.0"
@@ -67,17 +67,34 @@ pythonVersion = "3.10"
 pythonPlatform = "Linux"
 
 executionEnvironments = [
-  # { root = "src/web", pythonVersion = "3.5", pythonPlatform = "Windows", extraPaths = [ "src/service_libs" ] },
-  # { root = "src/sdk", pythonVersion = "3.0", extraPaths = [ "src/backend" ] },
-  # { root = "src/tests", extraPaths = ["src/tests/e2e", "src/sdk" ]},
-  { root = "./" }
+    # { root = "src/web", pythonVersion = "3.5", pythonPlatform = "Windows", extraPaths = [ "src/service_libs" ] },
+    # { root = "src/sdk", pythonVersion = "3.0", extraPaths = [ "src/backend" ] },
+    # { root = "src/tests", extraPaths = ["src/tests/e2e", "src/sdk" ]},
+    { root = "./" }
 ]
 
 [tool.mypy]
 plugins = [
-"mypy_django_plugin.main",
-"mypy_drf_plugin.main",
+    "mypy_django_plugin.main",
+    "mypy_drf_plugin.main",
 ]
+[tool.coverage.paths]
+source = [".", ]
+
+[tool.coverage.run]
+branch = true
+source = ["."]
+omit = ["*/tests/*",
+    "*/migrations/*",
+    "*/urls.py",
+    "*/settings/*",
+    "*/wsgi.py",
+    "manage.py",
+    "fabfile.py"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 100
 
 [tool.django-stubs]
 django_settings_module = "chuthe.settings"

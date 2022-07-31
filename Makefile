@@ -1,5 +1,4 @@
-init:
-	export CHUCHUTHE_ENV="LOCAL"
+default: mk mi cac su mock
 
 b:
 	docker build -t chuthe:latest -f Dockerfile .
@@ -37,3 +36,12 @@ mock:
 #	python manage.py shell < user/mocks.py
 #	python manage.py shell < heo/mocks.py
 
+test:
+	# Run all tests and report coverage
+	# Requires coverage
+	python manage.py makemigrations --dry-run | grep 'No changes detected' || \
+		(echo 'There are changes which require migrations.' && exit 1)
+	coverage erase
+	coverage run --source='.' manage.py test
+	coverage report -m --fail-under 100
+	coverage html
