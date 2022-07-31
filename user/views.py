@@ -13,6 +13,7 @@ from rest_framework import status
 from rest_framework import permissions
 from rest_framework.exceptions import APIException
 
+
 @extend_schema_view(**user_docs)
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()

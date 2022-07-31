@@ -9,6 +9,7 @@ urlpatterns = [
     path("docs/", include("docs.urls")),
     path("user/", include("user.urls")),
     path("apps/", include("apps.urls")),
+    path("alias/", include("alias.urls")),
 
     # path('auth', include('dj_rest_auth.urls')),
     path('auth/', include('chuthe.auth.urls')),
