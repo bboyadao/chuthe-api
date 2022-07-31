@@ -14,6 +14,10 @@ class UserAlias(viewsets.ModelViewSet):
     def get_queryset(self):
         return Alias.objects.filter(soft_deleted=False, user=self.request.user)
 
+    def perform_destroy(self, instance):
+        instance.soft_deleted = True
+        instance.save()
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 

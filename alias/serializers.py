@@ -17,4 +17,4 @@ class UserRetriveAliasSer(serializers.ModelSerializer):
 class UserUpdateAliasSer(serializers.ModelSerializer):
     class Meta:
         model = Alias
-        exclude = ["name", "des"]
+        fields = ["name", "des", ]
