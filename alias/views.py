@@ -3,6 +3,7 @@ from rest_framework import viewsets
 
 from alias.docs import alias_docs
 from alias.models import Alias
+from alias.paging import AliasUserPagination
 from alias.permissions import ThemSelf
 from alias.serializers import UserCreateAliasSer, UserRetriveAliasSer, UserUpdateAliasSer
 
@@ -10,9 +11,10 @@ from alias.serializers import UserCreateAliasSer, UserRetriveAliasSer, UserUpdat
 @extend_schema_view(**alias_docs)
 class UserAlias(viewsets.ModelViewSet):
     permission_classes = [ThemSelf, ]
+    pagination_class = AliasUserPagination
 
     def get_queryset(self):
-        return Alias.objects.filter(soft_deleted=False, user=self.request.user)
+        return Alias.objects.my_aliases(user=self.request.user)
 
     def perform_destroy(self, instance):
         instance.soft_deleted = True
@@ -21,7 +23,7 @@ class UserAlias(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-    def get_serializer_class(self) -> UserCreateAliasSer | UserRetriveAliasSer | UserUpdateAliasSer:
+    def get_serializer_class(self) -> UserCreateAliasSer | UserRetriveAliasSer | UserUpdateAliasSer | None:
         match self.action:
             case "create":
                 return UserCreateAliasSer

@@ -9,9 +9,7 @@ from user.docs import user_docs
 from user.perms import MySelf
 from user.serializers import MeSer, UserUpdateSer
 from user.throttles import FreeBehavior
-from rest_framework import status
 from rest_framework import permissions
-from rest_framework.exceptions import APIException
 
 
 @extend_schema_view(**user_docs)

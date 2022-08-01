@@ -25,3 +25,6 @@ class AliasManager(models.Manager):
             n_obj.path = self.gen_alias_id(obj)
             new_objs.append(n_obj)
         return super().bulk_create(new_objs, **kwargs)
+
+    def my_aliases(self, user):
+        return self.get_queryset().filter(user=user, soft_deleted=False).order_by("pk")
