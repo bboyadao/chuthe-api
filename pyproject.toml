@@ -90,7 +90,9 @@ omit = ["*/tests/*",
     "*/settings/*",
     "*/wsgi.py",
     "manage.py",
-    "fabfile.py"]
+    "fabfile.py",
+    "*/apps.py",
+    "*/tasks.py"]
 
 [tool.coverage.report]
 show_missing = true
