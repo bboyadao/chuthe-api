@@ -162,7 +162,9 @@ SPECTACULAR_SETTINGS = {
     'TITLE': "ChuThe's Api Documents",
     'DESCRIPTION': "This describe specs i/o modules only for internal team.",
     'VERSION': '0.1.0',
-    'SERVE_INCLUDE_SCHEMA': False,
+    'SERVE_INCLUDE_SCHEMA': True,
     'REDOC_DIST': 'SIDECAR',
-    "EXCLUDE_PATH": [reverse_lazy("schema")],
+    "EXCLUDE_PATH": [
+        reverse_lazy("schema")
+    ],
 }

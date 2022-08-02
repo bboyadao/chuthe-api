@@ -32,11 +32,6 @@ class UserAliasTests(APITestCase):
     def test_my_list_aliases(self):
         url_pattern = "Alias:user_alias-list"
         url = reverse(url_pattern)
-        # view_func = resolve(url).func
-        # module = importlib.import_module(view_func.__module__)
-        # view = getattr(module, view_func.__name__).as_view()
-        # paging = view.pagination_class
-
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], 1)
