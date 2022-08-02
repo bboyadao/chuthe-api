@@ -5,7 +5,6 @@ import os
 from pathlib import Path
 from django.urls import reverse_lazy
 
-
 SITE_ID = 1
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -167,4 +166,12 @@ SPECTACULAR_SETTINGS = {
     "EXCLUDE_PATH": [
         reverse_lazy("schema")
     ],
+
+}
+
+DOCS_TAG = {
+    "ADMINSTRATOR": [],
+    "USER": [],
+    "STAFF": [],
+    "PUBLIC": [],
 }

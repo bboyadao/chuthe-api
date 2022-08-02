@@ -2,18 +2,12 @@ from alias.serializers import UserCreateAliasSer, UserUpdateAliasSer, UserRetriv
 
 from drf_spectacular.utils import extend_schema
 from django.utils.translation import gettext as _
+from django.conf import settings
 
-from django.db import models
+TAGS = ["Alias"]
 
+settings.DOCS_TAG["USER"].append(TAGS)
 
-class ROLE(models.TextChoices):
-    ADMIN = _("ADMINSTRATOR"), _("ADMINSTRATOR").title()
-    STAFF = _("STAFF"), _("STAFF").title()
-    PUBLIC = _("PUBLIC"), _("PUBLIC").title()
-    USER = _("USER"), _("USER").title()
-
-
-TAGS = [ROLE.USER]
 alias_docs = {
     "create": extend_schema(
         # auth=[None],
@@ -59,6 +53,4 @@ alias_docs = {
             description=_("Patch alias")
         ),
 
-
 }
-
