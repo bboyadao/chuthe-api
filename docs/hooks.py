@@ -1,8 +1,7 @@
 from django.conf import settings
 
-
 EXCLUDE_PATH = settings.SPECTACULAR_SETTINGS["EXCLUDE_PATH"]
-ignores = ['apps.views.Application', ]
+ignores = ['apps.views.Application', "auth.LogoutView"]
 
 
 def preprocessing_filter_spec(endpoints):

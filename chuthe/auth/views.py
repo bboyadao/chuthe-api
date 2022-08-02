@@ -10,6 +10,7 @@ from chuthe.auth.docs import login_docs, logout_docs
 class LoginView(LV):
     pass
 
+
 @extend_schema_view(**logout_docs)
 class LogoutView(LO):
     pass

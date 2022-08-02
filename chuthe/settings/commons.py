@@ -26,6 +26,7 @@ DJANGO_CELERY_RESULTS_TASK_ID_MAX_LENGTH = 191
 ALLOWED_HOSTS = ["*"]
 
 AUTH_APPS = [
+    "rest_framework_simplejwt.token_blacklist",
     "oauth2_provider",
     "rest_framework.authtoken",
     "dj_rest_auth",
@@ -151,7 +152,7 @@ REST_FRAMEWORK = {
     ]
 }
 REST_USE_JWT = True
-
+JWT_AUTH_COOKIE = "CHUTHE_BOOTSTRAP"
 AUTHENTICATION_BACKENDS = [
     "user.auth.ChutheAuth"
 ]
