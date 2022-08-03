@@ -5,6 +5,6 @@ class LogoutRequestSerialiser(serializers.Serializer):
     refresh = serializers.CharField()
 
 
-class LogoutResponseSerialiser(serializers.Serializer):
+class ShitResponseSerialiser(serializers.Serializer):
     detail = serializers.CharField()
     status = serializers.IntegerField()

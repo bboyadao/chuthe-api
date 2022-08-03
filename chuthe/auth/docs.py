@@ -3,12 +3,11 @@ from django.utils.translation import gettext as _
 
 from django.conf import settings
 
-from chuthe.auth.serializers import LogoutResponseSerialiser, LogoutRequestSerialiser
+from chuthe.auth.serializers import ShitResponseSerialiser, LogoutRequestSerialiser
 
 TAG = "Auth"
-
 settings.DOCS_TAG["PUBLIC"].append(TAG)
-
+PUBLIC_TAGS = [TAG]
 login_docs = {
     "post": extend_schema(
         tags=[TAG],
@@ -20,15 +19,50 @@ logout_docs = {
     "post": extend_schema(
         tags=[TAG],
         request=LogoutRequestSerialiser,
-        responses=LogoutResponseSerialiser,
+        responses=ShitResponseSerialiser,
         operation_id=_("Log out (post)".title()),
-        description="Login Dess"
+        description="Logout (Recommend)"
     ),
     "get": extend_schema(
         tags=[TAG],
-        responses=LogoutResponseSerialiser,
+        responses=ShitResponseSerialiser,
         operation_id=_("Log out (get)".title()),
-        description="Login Dess"
+        description="Not recommend!"
     )
 }
-PUBLIC_TAGS = [TAG]
+
+change_password_docs = {
+    "post": extend_schema(
+        responses=ShitResponseSerialiser,
+        tags=[TAG],
+        operation_id=_("change password".title()),
+        description=""
+    ),
+}
+
+reset_password_confirm_docs = {
+    "post": extend_schema(
+        responses=ShitResponseSerialiser,
+        tags=[TAG],
+        operation_id=_("reset password confirm".title()),
+        description=""
+    ),
+}
+
+reset_password_docs = {
+    "post": extend_schema(
+        responses=ShitResponseSerialiser,
+        tags=[TAG],
+        operation_id=_("reset password".title()),
+        description=""
+    ),
+}
+
+user_detail_docs = {
+    "get": extend_schema(
+        responses=ShitResponseSerialiser,
+        tags=[TAG],
+        operation_id=_("user detail".title()),
+        description=""
+    ),
+}
