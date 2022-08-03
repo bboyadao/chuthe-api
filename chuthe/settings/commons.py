@@ -167,6 +167,13 @@ SPECTACULAR_SETTINGS = {
     "EXCLUDE_PATH": [
         reverse_lazy("schema")
     ],
+    'EXTENSIONS_INFO': {
+        "x-logo": {
+            "url": "https://raw.githubusercontent.com/bboyadao/static_me/main/imgs/chuthe/logo1.png",
+            "backgroundColor": "#FFFFFF",
+            "altText": "Nice NIce Logo"
+        }
+    },
 
 }
 
