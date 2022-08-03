@@ -172,7 +172,12 @@ SPECTACULAR_SETTINGS = {
             "url": "https://raw.githubusercontent.com/bboyadao/static_me/main/imgs/chuthe/logo1.png",
             "backgroundColor": "#FFFFFF",
             "altText": "Nice NIce Logo"
-        }
+        },
+        "x-meta":
+            {
+                "keywords": "documentation, operation, example",
+                "image": "https://raw.githubusercontent.com/bboyadao/static_me/main/imgs/chuthe/favicon.png"
+            }
     },
 
 }

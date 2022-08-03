@@ -15,6 +15,26 @@ login_docs = {
         description="Login Dess"
     ),
 }
+
+reset_password_confirm_docs = {
+    "post": extend_schema(
+        responses=ShitResponseSerialiser,
+        tags=[TAG],
+        operation_id=_("reset password confirm".title()),
+        description=""
+    ),
+}
+
+reset_password_docs = {
+    "post": extend_schema(
+        responses=ShitResponseSerialiser,
+        tags=[TAG],
+        operation_id=_("reset password".title()),
+        description=""
+    ),
+}
+TAG = "Account"
+settings.DOCS_TAG["USER"].append(TAG)
 logout_docs = {
     "post": extend_schema(
         tags=[TAG],
@@ -36,24 +56,6 @@ change_password_docs = {
         responses=ShitResponseSerialiser,
         tags=[TAG],
         operation_id=_("change password".title()),
-        description=""
-    ),
-}
-
-reset_password_confirm_docs = {
-    "post": extend_schema(
-        responses=ShitResponseSerialiser,
-        tags=[TAG],
-        operation_id=_("reset password confirm".title()),
-        description=""
-    ),
-}
-
-reset_password_docs = {
-    "post": extend_schema(
-        responses=ShitResponseSerialiser,
-        tags=[TAG],
-        operation_id=_("reset password".title()),
         description=""
     ),
 }

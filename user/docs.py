@@ -2,7 +2,6 @@ from drf_spectacular.utils import extend_schema, OpenApiExample
 from django.utils.translation import gettext as _
 
 
-
 TAG = "User View"
 user_docs = {
     # "destroy": extend_schema(
