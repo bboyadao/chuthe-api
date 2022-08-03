@@ -60,7 +60,6 @@ reset_password_docs = {
 
 user_detail_docs = {
     "get": extend_schema(
-        responses=ShitResponseSerialiser,
         tags=[TAG],
         operation_id=_("user detail".title()),
         description=""
