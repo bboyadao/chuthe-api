@@ -2,10 +2,13 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.static import serve
+from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('devices/', FCMDeviceAuthorizedViewSet.as_view({'post': 'create'}), name='create_fcm_device'),
+
     path("docs/", include("docs.urls")),
     path("user/", include("user.urls")),
     path("apps/", include("apps.urls")),

@@ -4,6 +4,7 @@ This is the common settings for project.
 import os
 from pathlib import Path
 from django.urls import reverse_lazy
+from firebase_admin import initialize_app
 
 SITE_ID = 1
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +46,9 @@ CELERY_APPS = ["django_celery_results",
 
 LIB_APPS = ["rest_framework",
             "phonenumber_field",
-            "corsheaders"]
+            "corsheaders",
+            "fcm_django",
+            ]
 
 EXTERNAL_APPS = LIB_APPS + CELERY_APPS + AUTH_APPS + DOCS_APPS
 
@@ -187,4 +190,29 @@ DOCS_TAG = {
     "USER": [],
     "STAFF": [],
     "PUBLIC": [],
+}
+
+PUSH_NOTIFICATIONS_SETTINGS = {
+    "FCM_API_KEY": "[your api key]",
+}
+
+FIREBASE_APP = initialize_app()
+
+FCM_DJANGO_SETTINGS = {
+    # an instance of firebase_admin.App to be used as default for all fcm-django requests
+    # default: None (the default Firebase app)
+    "DEFAULT_FIREBASE_APP": None,
+    # default: _('FCM Django')
+    "APP_VERBOSE_NAME": "Chuthe-PROD",
+    # true if you want to have only one active device per registered user at a time
+    # default: False
+    "ONE_DEVICE_PER_USER": False,
+    # devices to which notifications cannot be sent,
+    # are deleted upon receiving error response from FCM
+    # default: False
+    "DELETE_INACTIVE_DEVICES": True,
+    # Transform create of an existing Device (based on registration id) into
+    # an update. See the section
+    # "Update of device with duplicate registration ID" for more details.
+    "UPDATE_ON_DUPLICATE_REG_ID": True,
 }

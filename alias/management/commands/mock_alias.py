@@ -16,7 +16,6 @@ class Command(BaseCommand):
                 "password": make_password(f"test_user_{i}")
             }
             bulk.append(User(**me))
-        self.stdout.write(self.style.SUCCESS(f"Created {self.RANGE} Users"))
         return User.objects.bulk_create(bulk)
 
     def create_bulk_aliases(self):
@@ -28,8 +27,9 @@ class Command(BaseCommand):
                 "user": user
             }
             bulk.append(Alias(**alias))
-        self.stdout.write(self.style.SUCCESS(f"Linked {self.RANGE} Users and alias"))
         return Alias.objects.bulk_create(bulk)
 
     def handle(self, *args, **options):
         self.create_bulk_aliases()
+        self.stdout.write(self.style.SUCCESS(f"Created and Linked {self.RANGE} Users and alias"))
+

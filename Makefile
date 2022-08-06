@@ -37,8 +37,5 @@ mock:
 #	python manage.py shell < heo/mocks.py
 
 test:
-	# Run all tests and report coverage
-	# Requires coverage
-	python manage.py makemigrations --dry-run | grep 'No changes detected' || \
-		(echo 'There are changes which require migrations.' && exit 1)
+	#python manage.py makemigrations --dry-run | grep 'No changes detected' || (echo 'There are changes which require migrations.' && exit 1)
 	coverage erase && coverage run --source='.' manage.py test && coverage html && coverage report -m --fail-under 100
