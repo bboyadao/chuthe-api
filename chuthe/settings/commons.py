@@ -66,6 +66,7 @@ INTERNAL_APPS = [
     "apps.apps.AppsConfig",
     "company.apps.CompanyConfig",
     "alias.apps.AliasConfig",
+    "nof.apps.NofConfig",
 ]
 
 AUTH_USER_MODEL = "user.User"
