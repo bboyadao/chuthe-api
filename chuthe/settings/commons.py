@@ -48,6 +48,7 @@ LIB_APPS = ["rest_framework",
             "phonenumber_field",
             "corsheaders",
             "fcm_django",
+            "actstream",
             ]
 
 EXTERNAL_APPS = LIB_APPS + CELERY_APPS + AUTH_APPS + DOCS_APPS
@@ -59,6 +60,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites"
 ]
 
 INTERNAL_APPS = [

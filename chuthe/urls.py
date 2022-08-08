@@ -13,6 +13,8 @@ urlpatterns = [
     path("alias/", include("alias.urls")),
     path("nof/", include("nof.urls")),
 
+    path("activity/", include('actstream.urls')),
+
     # path('auth', include('dj_rest_auth.urls')),
     path('auth/', include('chuthe.auth.urls')),
     path('registry/', include('chuthe.auth.reg.urls')),
@@ -24,4 +26,3 @@ urlpatterns = [
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
 ]
-

@@ -523,6 +523,17 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-activity-stream"
+version = "1.4.1"
+description = "Generate generic activity streams from the actions on your site. Users can follow any actors' activities for personalized streams."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+jsonfield = ["django-jsonfield-backport (>=1.0.2,<2.0)"]
+
+[[package]]
 name = "django-allauth"
 version = "0.51.0"
 description = "Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication."
@@ -2076,7 +2087,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "5a27c1befb590f7ce5cccd49471817b0a399ea69e84b14787cf079b1f1cc6c10"
+content-hash = "95649fda2669a9ea5e1d2035fbda302f4747514417a11b59a2285ea542de062b"
 
 [metadata.files]
 amqp = []
@@ -2181,6 +2192,7 @@ django = [
     {file = "Django-4.0.5-py3-none-any.whl", hash = "sha256:502ae42b6ab1b612c933fb50d5ff850facf858a4c212f76946ecd8ea5b3bf2d9"},
     {file = "Django-4.0.5.tar.gz", hash = "sha256:f7431a5de7277966f3785557c3928433347d998c1e6459324501378a291e5aab"},
 ]
+django-activity-stream = []
 django-allauth = []
 django-celery-beat = [
     {file = "django-celery-beat-2.3.0.tar.gz", hash = "sha256:ba24f86ed956ba0ee2b43237a49303ebf5aa7e0fb0ccb7e0542b7e31a463dcba"},
