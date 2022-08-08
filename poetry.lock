@@ -1192,6 +1192,14 @@ MarkupSafe = ">=2.0"
 i18n = ["Babel (>=2.7)"]
 
 [[package]]
+name = "json-log-formatter"
+version = "0.5.1"
+description = "JSON log formatter"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "jsonschema"
 version = "4.9.0"
 description = "An implementation of JSON Schema validation for Python"
@@ -2087,7 +2095,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "95649fda2669a9ea5e1d2035fbda302f4747514417a11b59a2285ea542de062b"
+content-hash = "673e0222a700730739ad1ed4d3aa78b8767997950ff3aa43ffaedab2a9092ebe"
 
 [metadata.files]
 amqp = []
@@ -2282,6 +2290,7 @@ jinja2 = [
     {file = "Jinja2-3.1.2-py3-none-any.whl", hash = "sha256:6088930bfe239f0e6710546ab9c19c9ef35e29792895fed6e6e31a023a182a61"},
     {file = "Jinja2-3.1.2.tar.gz", hash = "sha256:31351a702a408a9e7595a8fc6150fc3f43bb6bf7e319770cbc0db9df9437e852"},
 ]
+json-log-formatter = []
 jsonschema = []
 jwcrypto = []
 kombu = [

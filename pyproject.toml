@@ -35,6 +35,7 @@ djangorestframework-simplejwt = "^5.2.0"
 firebase-admin = "^5.2.0"
 fcm-django = "^1.0.12"
 django-activity-stream = "^1.4.1"
+JSON-log-formatter = "^0.5.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"

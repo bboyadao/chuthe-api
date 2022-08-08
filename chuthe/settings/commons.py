@@ -1,10 +1,18 @@
 """
 This is the common settings for project.
 """
+
+import logging
 import os
 from pathlib import Path
 from django.urls import reverse_lazy
 from firebase_admin import initialize_app
+from ..logging import LOGGING
+from logging import config
+
+LOGGING_CONFIG = None
+config.dictConfig(LOGGING)
+LOGGER = logging.getLogger("my_json")
 
 SITE_ID = 1
 BASE_DIR = Path(__file__).resolve().parent.parent
