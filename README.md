@@ -1,3 +1,11 @@
+##RULE OF CODE:
+1. Every line of log please use this: 
+```shell
+from django.conf import settings
+
+loger = settings.LOGGER
+loger.info("mess", **extra)
+```
 # chuthe-api (features draff)
 ## todos
 ### scan page
