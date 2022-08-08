@@ -9,3 +9,4 @@ celerybeat-schedule
 /htmlcov/
 /.mypy_cache/
 /out/
+.coverage
