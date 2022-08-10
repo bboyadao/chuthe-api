@@ -29,7 +29,7 @@ LOGGING = {
         'json_file': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': './my-log.json',
+            'filename': './logs/api/log.json',
             'formatter': 'json',
             'maxBytes': 1024*1024*15,  # 15MB
             'backupCount': 10,

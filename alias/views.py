@@ -6,6 +6,9 @@ from alias.models import Alias
 from alias.paging import AliasUserPagination
 from alias.permissions import ThemSelf
 from alias.serializers import UserCreateAliasSer, UserRetriveAliasSer, UserUpdateAliasSer
+from django.conf import settings
+
+loger = settings.LOGGER
 
 
 @extend_schema_view(**alias_docs)
@@ -14,6 +17,7 @@ class UserAlias(viewsets.ModelViewSet):
     pagination_class = AliasUserPagination
 
     def get_queryset(self):
+        loger.info("cc")
         return Alias.objects.my_aliases(user=self.request.user)
 
     def perform_destroy(self, instance):
