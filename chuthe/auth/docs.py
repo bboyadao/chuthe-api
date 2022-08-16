@@ -7,7 +7,6 @@ from chuthe.auth.serializers import ShitResponseSerialiser, LogoutRequestSeriali
 
 TAG = "Auth"
 settings.DOCS_TAG["PUBLIC"].append(TAG)
-PUBLIC_TAGS = [TAG]
 login_docs = {
     "post": extend_schema(
         tags=[TAG],

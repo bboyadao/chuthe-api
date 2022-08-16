@@ -10,3 +10,4 @@ celerybeat-schedule
 /.mypy_cache/
 /out/
 .coverage
+/logs/api/log.json

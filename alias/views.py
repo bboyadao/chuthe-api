@@ -17,7 +17,6 @@ class UserAlias(viewsets.ModelViewSet):
     pagination_class = AliasUserPagination
 
     def get_queryset(self):
-        loger.info("cc")
         return Alias.objects.my_aliases(user=self.request.user)
 
     def perform_destroy(self, instance):
@@ -36,3 +35,5 @@ class UserAlias(viewsets.ModelViewSet):
             case "update" | "partial_update":
                 return UserUpdateAliasSer
             case _: return UserRetriveAliasSer
+
+

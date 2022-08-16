@@ -53,6 +53,7 @@ CELERY_APPS = ["django_celery_results",
                "django_celery_beat"]
 
 LIB_APPS = ["rest_framework",
+            "django_filters",
             "phonenumber_field",
             "corsheaders",
             "fcm_django",
@@ -77,6 +78,7 @@ INTERNAL_APPS = [
     "company.apps.CompanyConfig",
     "alias.apps.AliasConfig",
     "nof.apps.NofConfig",
+    "manager.apps.ManagerConfig",
 ]
 
 AUTH_USER_MODEL = "user.User"
@@ -97,7 +99,7 @@ ROOT_URLCONF = "chuthe.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

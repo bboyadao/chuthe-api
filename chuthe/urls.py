@@ -12,6 +12,7 @@ urlpatterns = [
     path("apps/", include("apps.urls")),
     path("alias/", include("alias.urls")),
     path("nof/", include("nof.urls")),
+    path("manager/", include("manager.urls")),
 
     path("activity/", include('actstream.urls')),
 
