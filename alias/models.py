@@ -16,3 +16,4 @@ class Alias(models.Model):
 
     class Meta:
         verbose_name_plural = _("Aliases")
+        ordering = ['-pk']

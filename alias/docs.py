@@ -63,21 +63,21 @@ manage_alias_docs = {
         request=UserCreateAliasSer,
         responses=UserRetriveAliasSer,
         tags=TAGS,
-        operation_id=_("Create Alias".title()),
+        operation_id=_("Create An Alias".title()),
         description=_("require: User authenticated to create alias")
     ),
 
     "retrieve": extend_schema(
         responses=UserRetriveAliasSer,
         tags=TAGS,
-        operation_id=_("Detail alias".title()),
+        operation_id=_("View Detail alias".title()),
         description=_("Detail mai alias")
     ),
 
     "list": extend_schema(
         responses=UserRetriveAliasSer(many=True),
         tags=TAGS,
-        operation_id=_("Aliases".title()),
+        operation_id=_("List of Aliases".title()),
         description=_("List of alias")
     ),
 

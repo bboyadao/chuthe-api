@@ -11,3 +11,4 @@ celerybeat-schedule
 /out/
 .coverage
 /logs/api/log.json
+/logs/celery/log.json
