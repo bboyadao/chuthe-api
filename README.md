@@ -6,6 +6,17 @@ from django.conf import settings
 loger = settings.LOGGER
 loger.info("mess", **extra)
 ```
+### For depveloper.
+1. Clean migrate local db ``` make cl```
+2. Makemigration  ``` make mk```
+3. Migrate  ``` make mi```
+4. Superuser ```make su```
+5. Create DB Cache ```make cac```
+6. Mock data ```make mock```
+7. Build and Push image ```make b p```
+8. Run server ```make r``` or run server plus ```make ru```
+9. Shell plus ```make sh```
+
 # chuthe-api (features draff)
 ## todos
 ### scan page
