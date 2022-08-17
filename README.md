@@ -9,7 +9,7 @@ loger.info("mess", **extra)
 ### For depveloper.
 I. Envs.
 1. Clone env template to (eg: **local.env** as you can see at gitignores)`cp -r env.example local.env` or `cat env.example > local.env` and then update values
-2. `chmod +x exportenvs.sh && bash exportenvs.sh` or run it directly in the terminal `eval $(grep -v -e '^#' local.env | xargs -I {} echo export \'{}\')`
+2. Run it directly in the terminal `eval $(grep -v -e '^#' local.env | xargs -I {} echo export \'{}\')`
 
 II. Local Dev.
 1. Clean migrate local db ``` make cl```
