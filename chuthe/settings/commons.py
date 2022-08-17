@@ -179,6 +179,7 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': "This describe specs i/o modules only for internal team.",
     'VERSION': '0.1.0',
     'SERVE_INCLUDE_SCHEMA': True,
+    'SERVE_PERMISSIONS': ['rest_framework.permissions.IsAuthenticated'],
     'REDOC_DIST': 'SIDECAR',
     "EXCLUDE_PATH": [
         reverse_lazy("schema")
