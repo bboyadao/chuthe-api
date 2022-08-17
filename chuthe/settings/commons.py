@@ -243,12 +243,15 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-AUTO_SIGNUP = True
-UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_AUTO_SIGNUP = True
 ACCOUNT_EMAIL_CONFIRMATION_HMAC = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 180
-ACCOUNT_EMAIL_VERIFICATION = lazy('allauth.account.app_settings.AppSettings.EmailVerificationMethod.OPTIONAL')
+# ACCOUNT_EMAIL_VERIFICATION = lazy('allauth.account.app_settings.AppSettings.EmailVerificationMethod.OPTIONAL')
 
+
+# from allauth.account.models import EmailAddress, EmailConfirmation
