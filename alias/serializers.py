@@ -8,13 +8,20 @@ class UserCreateAliasSer(serializers.ModelSerializer):
         fields = ["name", "des"]
 
 
+class UserListAliasSer(serializers.ModelSerializer):
+    class Meta:
+        model = Alias
+        fields = ["path", "name"]
+
+
 class UserRetriveAliasSer(serializers.ModelSerializer):
     class Meta:
         model = Alias
-        fields = ["id", "path", "name",  "des"]
+        exclude = ["soft_deleted", "user"]
+        lookup_field = "path"
 
 
-class UserUpdateAliasSer(serializers.ModelSerializer):
+class UserPatchAliasSer(serializers.ModelSerializer):
     class Meta:
         model = Alias
-        fields = ["name", "des", ]
+        exclude = ["id", "soft_deleted", "created_by", "user"]

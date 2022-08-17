@@ -17,3 +17,5 @@ class Alias(models.Model):
     class Meta:
         verbose_name_plural = _("Aliases")
         ordering = ['-pk']
+        unique_together = ["id", "path"]
+        index_together = unique_together
