@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+import uuid
 
 
 class AliasManager(models.Manager):
@@ -12,7 +12,12 @@ class AliasManager(models.Manager):
         if isinstance(obj, self.model):
             user_pk = obj.user.pk
 
-        return f"{user_pk}{int(timezone.now().timestamp() * 1000000)}"
+        uniq = f"{user_pk}{str(uuid.uuid4())[:8]}"
+
+        if self.get_queryset().filter(path=uniq).exists():
+            return self.gen_alias_id(obj)
+        else:
+            return uniq
 
     def create(self, **obj_data):
         obj_data['path'] = self.gen_alias_id(obj_data)
