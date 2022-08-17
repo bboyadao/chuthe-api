@@ -1,11 +1,14 @@
-from django.urls import path, re_path
+from django.urls import re_path
 from django.views.generic import TemplateView
 
-from chuthe.auth.reg.views import RegisterView, VerifyEmailView, ResendEmailVerificationView
-
+from chuthe.auth.reg.views import RegisterView, VerifyEmailView, ResendEmailVerificationView, GoogleLogin
+from django.urls import path
 
 urlpatterns = [
     path('', RegisterView.as_view(), name='rest_register'),
+
+    path("google/", GoogleLogin.as_view(), name="google_login"),
+
     path('verify-email/', VerifyEmailView.as_view(), name='rest_verify_email'),
     path('resend-email/', ResendEmailVerificationView.as_view(), name="rest_resend_email"),
 

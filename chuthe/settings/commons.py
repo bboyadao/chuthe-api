@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from firebase_admin import initialize_app
 from ..logging import LOGGING
 from logging import config
+from django.utils.functional import lazy
 
 LOGGING_CONFIG = None
 config.dictConfig(LOGGING)
@@ -39,11 +40,12 @@ AUTH_APPS = [
     "oauth2_provider",
     "rest_framework.authtoken",
     "dj_rest_auth",
+    "dj_rest_auth.registration",
     "allauth",
     "allauth.account",
-    "dj_rest_auth.registration",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.facebook",
+    "allauth.socialaccount.providers.google",
 ]
 
 DOCS_APPS = ["drf_spectacular",
@@ -230,3 +232,23 @@ FCM_DJANGO_SETTINGS = {
     # "Update of device with duplicate registration ID" for more details.
     "UPDATE_ON_DUPLICATE_REG_ID": True,
 }
+
+SOCIALACCOUNT_PROVIDERS = {
+
+    'google': {
+        'APP': {
+            'client_id': os.getenv("GOOGLE_CLIENT_ID"),
+            'secret': os.getenv("GOOGLE_CLIENT_SEC"),
+            'key': ''
+        }
+    }
+}
+AUTO_SIGNUP = True
+UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_EMAIL_CONFIRMATION_HMAC = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 180
+ACCOUNT_EMAIL_VERIFICATION = lazy('allauth.account.app_settings.AppSettings.EmailVerificationMethod.OPTIONAL')
+
