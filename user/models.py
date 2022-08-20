@@ -5,16 +5,14 @@ import uuid
 
 import zoneinfo
 from django.utils.translation import gettext_lazy as _
-
 from django.conf.global_settings import LANGUAGES
-from django.conf import settings
 
 
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):
-        return self.username
+        return self.username or self.email or self.id.__str__()
 
     phone = PhoneNumberField(blank=True)
     # USERNAME_FIELD = 'email'

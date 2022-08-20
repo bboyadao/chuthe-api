@@ -9,12 +9,10 @@ from django.urls import reverse_lazy
 from firebase_admin import initialize_app
 from ..logging import LOGGING
 from logging import config
-from django.utils.functional import lazy
 
 LOGGING_CONFIG = None
 config.dictConfig(LOGGING)
-LOGGER = logging.getLogger("my_json")
-
+LOGGER = logging.getLogger("chuthe")
 SITE_ID = 1
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -94,6 +92,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "chuthe.middlewares.supervisor.ChutheIOMiddleware",
 ]
 
 ROOT_URLCONF = "chuthe.urls"
@@ -167,7 +166,8 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
-    ]
+    ],
+    "EXCEPTION_HANDLER": "chuthe.errors.exceptions.chuthe_exception_handler"
 }
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = "CHUTHE_BOOTSTRAP"
@@ -251,7 +251,3 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 180
-# ACCOUNT_EMAIL_VERIFICATION = lazy('allauth.account.app_settings.AppSettings.EmailVerificationMethod.OPTIONAL')
-
-
-# from allauth.account.models import EmailAddress, EmailConfirmation
