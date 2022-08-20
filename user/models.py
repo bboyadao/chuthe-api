@@ -1,5 +1,8 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from phonenumber_field.modelfields import PhoneNumberField
 import uuid
 
@@ -22,25 +25,28 @@ class User(AbstractUser):
         self.is_active = False
         self.save()
 
-# class LANGS(models.TextChoices):
-#     def __init__(self):
-    #         sorted(setattr(self.item = item) for item in zoneinfo.available_timezones())
+
+class UserSetting(models.Model):
+    user = models.OneToOneField("user.User", on_delete=models.PROTECT, primary_key=True)
+    lang = models.CharField(max_length=7,
+                            choices=LANGUAGES,
+                            default=settings.LANGUAGE_CODE)
+    tz = models.CharField(
+        choices=sorted(
+            (item, item) for item in zoneinfo.available_timezones()),
+        max_length=64,
+        default=settings.USER_TIME_ZONE,
+    )
+
+    def __str__(self):
+        return f"Setting of {self.user.username or self.user.email or self.user.id.__str__()}"
+
+    class Meta:
+        verbose_name_plural = _("User settings")
+        ordering = ['-pk']
 
 
-class Profile(models.Model):
-    user = models.ForeignKey("user.User", null=True, on_delete=models.PROTECT)
-    # dob = models.DateField(blank=True)
-    # full_name = models.TextField(blank=True)
-    # email = models.EmailField(verbose_name=_(''), null=True)
-    # phone = models.CharField(max_length=12, null=True)
-    # address = models.TextField(blank=True)
-    # lang = models.CharField(max_length=7,
-    #                         choices=LANGUAGES,
-    #                         default=settings.LANGUAGE_CODE)
-    # tz = models.CharField(
-    #     choices=sorted(
-    #         (item, item) for item in zoneinfo.available_timezones()),
-    #     max_length=64,
-    #     default=settings.USER_TIME_ZONE,
-    # )
-    
+@receiver(post_save, sender=User)
+def user_settings_receiver(sender, instance, created, **kwargs):  # noqa
+    if created:
+        UserSetting.objects.create(user=instance)
