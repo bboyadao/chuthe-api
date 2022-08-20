@@ -2,12 +2,14 @@ import os
 import sys
 from celery import Celery
 from chuthe.settings.commons import PROJECT_NAME
+from django.conf import settings
+logger = settings.LOGGER
 
 env = os.getenv("CHUTHE_ENV")
 if env is None:
     sys.exit(1)
 
-print(f"Running on django setting file's: {PROJECT_NAME}.settings.{env.lower()}")
+# logger.info(f"Running on django setting file's: {PROJECT_NAME}.settings.{env.lower()}")
 
 try:
     exec(f"from .settings import {env.lower()}")
