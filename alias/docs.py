@@ -1,6 +1,6 @@
 from alias.serializers import UserCreateAliasSer, UserPatchAliasSer, UserRetriveAliasSer, UserListAliasSer
 
-from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.utils import extend_schema
 from django.utils.translation import gettext as _
 from django.conf import settings
 
@@ -10,7 +10,6 @@ settings.DOCS_TAG["USER"].append(TAGS)
 
 alias_docs = {
     "create": extend_schema(
-        # auth=[None],
         request=UserCreateAliasSer,
         responses=UserRetriveAliasSer,
         tags=TAGS,
