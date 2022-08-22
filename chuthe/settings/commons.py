@@ -170,7 +170,6 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
-    "EXCEPTION_HANDLER": "chuthe.errors.exceptions.chuthe_exception_handler"
 }
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = "CHUTHE_BOOTSTRAP"

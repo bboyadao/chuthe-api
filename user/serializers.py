@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from user.models import User
+from user.models import User, UserSettings
 
 
 class UserSer(serializers.ModelSerializer):
@@ -37,3 +37,10 @@ class UserUpdateSer(serializers.ModelSerializer):
             "phone",
             "email",
         ]
+
+
+class UserSettingSer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserSettings
+        exclude = ["user"]

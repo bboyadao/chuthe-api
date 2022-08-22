@@ -1,9 +1,15 @@
-from rest_framework.routers import DefaultRouter
-from user.views import UserView
+from django.urls import path
 
-router = DefaultRouter()
-router.register('', UserView)
+from user.views import UserView, UserSettingView
+from rest_framework_extensions.routers import ExtendedSimpleRouter
 
-urlpatterns = list()
-urlpatterns += router.urls
+router = ExtendedSimpleRouter()
+(
+    router.register(r'', UserView, basename='user')
 
+)
+urlpatterns = router.urls
+urlpatterns += [
+    path("<uuid:user_pk>/settings/", UserSettingView.as_view({'get': 'retrieve', 'patch': 'partial_update'})),
+
+]
