@@ -733,6 +733,17 @@ typing-extensions = ">=3.10.0"
 compatible-mypy = ["mypy (>=0.950,<0.970)"]
 
 [[package]]
+name = "drf-extensions"
+version = "0.7.1"
+description = "Extensions for Django REST Framework"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+djangorestframework = ">=3.9.3"
+
+[[package]]
 name = "drf-spectacular"
 version = "0.23.1"
 description = "Sane and flexible OpenAPI 3 schema generation for Django REST framework"
@@ -2095,7 +2106,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "673e0222a700730739ad1ed4d3aa78b8767997950ff3aa43ffaedab2a9092ebe"
+content-hash = "8748bbce87184fc35c4b45da62d15acd1a882812435568114f2f27ae5bb443fb"
 
 [metadata.files]
 amqp = []
@@ -2224,6 +2235,7 @@ djangorestframework = [
 ]
 djangorestframework-simplejwt = []
 djangorestframework-stubs = []
+drf-extensions = []
 drf-spectacular = []
 drf-spectacular-sidecar = []
 entrypoints = [
