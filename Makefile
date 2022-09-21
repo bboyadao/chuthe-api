@@ -40,8 +40,8 @@ test:
 	#python manage.py makemigrations --dry-run | grep 'No changes detected' || (echo 'There are changes which require migrations.' && exit 1)
 	coverage erase && coverage run --source='.' manage.py test && coverage htm && coverage report -m --fail-under 100
 
-b:
+beat:
 	celery -A chuthe beat -l INFO
 
-w:
-	celery -A chuthe worker -l INFO
+worker:
+	celery -A chuthe worker -l INFO -Ofair --concurrency=4 -P eventlet -c 1000 --without-gossip --without-mingle --without-heartbeat
