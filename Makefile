@@ -39,3 +39,9 @@ mock:
 test:
 	#python manage.py makemigrations --dry-run | grep 'No changes detected' || (echo 'There are changes which require migrations.' && exit 1)
 	coverage erase && coverage run --source='.' manage.py test && coverage htm && coverage report -m --fail-under 100
+
+b:
+	celery -A chuthe beat -l INFO
+
+w:
+	celery -A chuthe worker -l INFO

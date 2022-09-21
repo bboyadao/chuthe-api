@@ -3,7 +3,7 @@ from json_log_formatter import VerboseJSONFormatter
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
@@ -29,20 +29,20 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'json'
         },
-        # 'json_file': {
-        #     'level': 'INFO',
-        #     'class': 'logging.handlers.RotatingFileHandler',
-        #     'filename': './logs/api/log.json',
-        #     'formatter': 'json',
-        #     'maxBytes': 1024 * 1024 * 15,  # 15MB
-        #     'backupCount': 10,
-        # },
+        'json_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': './logs/api/log.json',
+            'formatter': 'json',
+            'maxBytes': 1024 * 1024 * 15,  # 15MB
+            'backupCount': 10,
+        },
 
     },
     'loggers': {
         'chuthe': {
-            'handlers': ['console'],
-            "propagate": True,
+            'handlers': ['console', 'json_file'],
+            # "propagate": True,
             'level': 'DEBUG',
         }
 

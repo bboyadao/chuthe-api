@@ -5,6 +5,7 @@ This is the common settings for project.
 import logging
 import os
 from pathlib import Path
+
 from django.urls import reverse_lazy
 from firebase_admin import initialize_app
 from ..logging import LOGGING
@@ -24,11 +25,6 @@ ENV = os.environ.get("CHUTHE_ENV")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-CELERY_CACHE_BACKEND = "default"
-CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_SERIALIZER = "json"
-CELERY_ENABLE_UTC = True
-CELERY_RESULT_BACKEND = "django-db"
 DJANGO_CELERY_RESULTS_TASK_ID_MAX_LENGTH = 191
 
 ALLOWED_HOSTS = ["*"]

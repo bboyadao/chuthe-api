@@ -37,6 +37,7 @@ fcm-django = "^1.0.12"
 django-activity-stream = "^1.4.1"
 JSON-log-formatter = "^0.5.1"
 drf-extensions = "^0.7.1"
+eventlet = "^0.33.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
