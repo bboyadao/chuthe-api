@@ -45,3 +45,6 @@ beat:
 
 worker:
 	celery -A chuthe worker -l INFO -Ofair --concurrency=4 -P eventlet -c 1000 --without-gossip --without-mingle --without-heartbeat
+
+dr:
+	docker run --rm -ti -p 9000:9000 agrifile:latest
