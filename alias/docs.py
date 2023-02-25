@@ -1,4 +1,4 @@
-from alias.serializers import UserCreateAliasSer, UserPatchAliasSer, UserRetriveAliasSer, UserListAliasSer
+from alias.serializers import UserCreateAliasSer, UserPatchAliasSer, UserRetriveAliasSer, UserListAliasSer, Attrs
 
 from drf_spectacular.utils import extend_schema
 from django.utils.translation import gettext as _
@@ -53,6 +53,13 @@ alias_docs = {
         responses=UserPatchAliasSer,
         tags=TAGS,
         operation_id=_("Patch a field of Alias ".title()),
+        description=_("Patch alias")
+    ),
+    "att": extend_schema(
+        request=Attrs,
+        responses=Attrs,
+        tags=TAGS,
+        operation_id=_("add attr".title()),
         description=_("Patch alias")
     ),
 

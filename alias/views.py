@@ -2,6 +2,7 @@ from rest_framework import filters
 
 from drf_spectacular.utils import extend_schema_view
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -9,7 +10,7 @@ from alias.docs import alias_docs
 from alias.models import Alias
 from alias.paging import AliasUserPagination
 from alias.permissions import ThemSelf
-from alias.serializers import UserCreateAliasSer, UserRetriveAliasSer, UserPatchAliasSer, UserListAliasSer
+from alias.serializers import UserCreateAliasSer, UserRetriveAliasSer, UserPatchAliasSer, UserListAliasSer, Attrs
 from django.conf import settings
 
 loger = settings.LOGGER
@@ -23,6 +24,13 @@ class UserAlias(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     filterset_fields = ["created_at"]
     lookup_field = "path"
+
+    @action(methods=["post", "get", 'options'], detail=True)
+    def attrs(self, *args, **kwargs):
+        serializer = self.get_serializer(data=self.request.data)
+        if serializer.is_valid(raise_exception=True):
+            obj = serializer.create()
+        return Response({"ok": "ok"})
 
     def update(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -47,6 +55,7 @@ class UserAlias(viewsets.ModelViewSet):
                 return UserListAliasSer
             case "partial_update":
                 return UserPatchAliasSer
+            case "attrs": return Attrs
             case _: return UserRetriveAliasSer
 
 

@@ -1,10 +1,10 @@
-from rest_framework.routers import DefaultRouter
-
+from rest_framework_extensions.routers import ExtendedSimpleRouter
 from alias.views import UserAlias
 
 app_name = "Alias"
 
-router = DefaultRouter()
+
+router = ExtendedSimpleRouter()
 router.register("", UserAlias, "user_alias")
 
 urlpatterns = router.urls
