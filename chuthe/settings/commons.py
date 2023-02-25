@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 PROJECT_NAME = "chuthe"
 
-ENVS = ["PROD", "STAGING", "DEV", "LOCAL"]
+ENVS = ["PROD", "STAGING", "DEV"]
 
 ENV = os.environ.get("CHUTHE_ENV")
 
