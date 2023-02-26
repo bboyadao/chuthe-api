@@ -1,7 +1,21 @@
 from django.db import models
+from rest_framework.reverse import reverse_lazy
 
 from alias.managers import AliasManager
 from django.utils.translation import gettext_lazy as _
+from allauth.socialaccount.models import SocialAccount
+
+
+class ContactInformation(models.Model):
+    phone = models.CharField(max_length=255)
+    work = models.CharField(max_length=255)
+    add = models.CharField(max_length=255)
+
+
+class Links(models.Model):
+    alias = models.ForeignKey("alias.Alias", on_delete=models.CASCADE)
+    alt = models.TextField(help_text=_("Description"), null=True, blank=True)
+    val = models.URLField()
 
 
 class Alias(models.Model):
@@ -14,6 +28,11 @@ class Alias(models.Model):
     default = models.BooleanField(null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     soft_deleted = models.BooleanField(null=True, default=False)
+    socialaccount = models.ManyToManyField(SocialAccount)
+    contact = models.ForeignKey("alias.ContactInformation", on_delete=models.CASCADE, null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse_lazy("user_alias-detail", self.path)
 
     class Meta:
         verbose_name_plural = _("Aliases")
@@ -53,4 +72,4 @@ class PaymentBrand(models.Model):
 class PaymentAliasAttr(models.Model):
     alias = models.ForeignKey("alias.Alias", on_delete=models.CASCADE)
     dst = models.ForeignKey("alias.PaymentBrand", on_delete=models.CASCADE)
-    number = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)

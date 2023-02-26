@@ -10,7 +10,7 @@ from alias.docs import alias_docs
 from alias.models import Alias
 from alias.paging import AliasUserPagination
 from alias.permissions import ThemSelf
-from alias.serializers import UserCreateAliasSer, UserRetriveAliasSer, UserPatchAliasSer, UserListAliasSer, Attrs
+from alias.serializers import UserCreateAliasSer, UserRetrieveAliasSer, UserPatchAliasSer, UserListAliasSer, Attrs
 from django.conf import settings
 
 loger = settings.LOGGER
@@ -45,17 +45,17 @@ class UserAlias(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-    def get_serializer_class(self) -> UserListAliasSer | UserCreateAliasSer | UserRetriveAliasSer | UserPatchAliasSer | None:
+    def get_serializer_class(self) -> UserListAliasSer | UserCreateAliasSer | UserRetrieveAliasSer | UserPatchAliasSer | None:
         match self.action:
             case "create":
                 return UserCreateAliasSer
             case "retrieve":
-                return UserRetriveAliasSer
+                return UserRetrieveAliasSer
             case "list":
                 return UserListAliasSer
             case "partial_update":
                 return UserPatchAliasSer
             case "attrs": return Attrs
-            case _: return UserRetriveAliasSer
+            case _: return UserRetrieveAliasSer
 
 

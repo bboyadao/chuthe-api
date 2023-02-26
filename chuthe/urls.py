@@ -4,8 +4,11 @@ from django.contrib import admin
 from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
 from django.urls import include, path, re_path
 
+from chuthe.views import ConstApi
 
 urlpatterns = [
+
+    path("const/", ConstApi.as_view({"get": "retrieve"})),
     path("admin/", admin.site.urls),
     path("docs/", include("docs.urls")),
     path("user/", include("user.urls")),

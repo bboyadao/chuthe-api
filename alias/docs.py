@@ -1,4 +1,4 @@
-from alias.serializers import UserCreateAliasSer, UserPatchAliasSer, UserRetriveAliasSer, UserListAliasSer, Attrs
+from alias.serializers import UserCreateAliasSer, UserPatchAliasSer, UserRetrieveAliasSer, UserListAliasSer, Attrs
 
 from drf_spectacular.utils import extend_schema
 from django.utils.translation import gettext as _
@@ -11,14 +11,14 @@ settings.DOCS_TAG["USER"].append(TAGS)
 alias_docs = {
     "create": extend_schema(
         request=UserCreateAliasSer,
-        responses=UserRetriveAliasSer,
+        responses=UserRetrieveAliasSer,
         tags=TAGS,
         operation_id=_("Create Alias".title()),
         description=_("require: User authenticated to create alias")
     ),
 
     "retrieve": extend_schema(
-        responses=UserRetriveAliasSer,
+        responses=UserRetrieveAliasSer,
         tags=TAGS,
         operation_id=_("Detail alias".title()),
         description=_("Detail mai alias")
@@ -71,21 +71,21 @@ manage_alias_docs = {
     "create": extend_schema(
         # auth=[None],
         request=UserCreateAliasSer,
-        responses=UserRetriveAliasSer,
+        responses=UserRetrieveAliasSer,
         tags=TAGS,
         operation_id=_("Create An Alias".title()),
         description=_("require: User authenticated to create alias")
     ),
 
     "retrieve": extend_schema(
-        responses=UserRetriveAliasSer,
+        responses=UserRetrieveAliasSer,
         tags=TAGS,
         operation_id=_("View Detail alias".title()),
         description=_("Detail mai alias")
     ),
 
     "list": extend_schema(
-        responses=UserRetriveAliasSer(many=True),
+        responses=UserRetrieveAliasSer(many=True),
         filters=True,
         tags=TAGS,
         operation_id=_("List of Aliases".title()),

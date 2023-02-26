@@ -40,6 +40,7 @@ AUTH_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.facebook",
     "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.linkedin",
 ]
 
 DOCS_APPS = ["drf_spectacular",

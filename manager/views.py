@@ -4,7 +4,7 @@ from rest_framework import viewsets, permissions
 from alias.docs import manage_alias_docs
 from alias.models import Alias
 from alias.paging import AliasUserPagination
-from alias.serializers import UserCreateAliasSer, UserRetriveAliasSer, UserPatchAliasSer
+from alias.serializers import UserCreateAliasSer, UserRetrieveAliasSer, UserPatchAliasSer
 from rest_framework import filters
 
 
@@ -29,12 +29,12 @@ class ManageAlias(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
 
-    def get_serializer_class(self) -> UserCreateAliasSer | UserRetriveAliasSer | UserPatchAliasSer | None:
+    def get_serializer_class(self) -> UserCreateAliasSer | UserRetrieveAliasSer | UserPatchAliasSer | None:
         match self.action:
             case "create":
                 return UserCreateAliasSer
             case "retrieve" | "list":
-                return UserRetriveAliasSer
+                return UserRetrieveAliasSer
             case "update" | "partial_update":
                 return UserPatchAliasSer
-            case _: return UserRetriveAliasSer
+            case _: return UserRetrieveAliasSer

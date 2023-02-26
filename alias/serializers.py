@@ -1,5 +1,30 @@
+from allauth.socialaccount.models import SocialAccount
 from rest_framework import serializers
-from alias.models import Alias, ValueAilasValue
+from alias.models import Alias, ValueAilasValue, ContactInformation, Links
+
+
+class LinksSer(serializers.ModelSerializer):
+    class Meta:
+        model = Links
+        fields = ["id", "val", "alt"]
+
+
+class ContactInformationSer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactInformation
+        fields = "__all__"
+
+
+class SocialAccountSer(serializers.ModelSerializer):
+    provider_id = serializers.CharField(source="provider")
+    name = serializers.SerializerMethodField()
+
+    def get_name(self, ins):
+        return ins.get_provider_display()
+
+    class Meta:
+        model = SocialAccount
+        fields = ["id", "uid", "provider_id", "name"]
 
 
 class UserCreateAliasSer(serializers.ModelSerializer):
@@ -9,16 +34,31 @@ class UserCreateAliasSer(serializers.ModelSerializer):
 
 
 class UserListAliasSer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name="Alias:user_alias-detail", lookup_field="path")
+
     class Meta:
         model = Alias
-        fields = ["path", "name"]
+        fields = ["path", "name", "url"]
 
 
-class UserRetriveAliasSer(serializers.ModelSerializer):
+class UserRetrieveAliasSer(serializers.ModelSerializer):
     class Meta:
         model = Alias
-        exclude = ["soft_deleted", "user"]
+        fields = [
+            "name",
+            "des",
+            "default",
+            "socials",
+            "contact",
+            "links",
+            "created_at",
+            "created_by",
+        ]
         lookup_field = "path"
+
+    socials = SocialAccountSer(many=True, read_only=True, source="socialaccount")
+    contact = ContactInformationSer(read_only=True)
+    links = LinksSer(read_only=True, many=True, source="links_set")
 
 
 class UserPatchAliasSer(serializers.ModelSerializer):
@@ -55,5 +95,4 @@ class Attrs(serializers.Serializer):
         attrs = self.validated_data.get("attrs")
         datas = [ValueAilasValue(**i) for i in attrs]
         aa = ValueAilasValue.objects.bulk_create(datas)
-        print(aa)
         return 200
