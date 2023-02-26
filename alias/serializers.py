@@ -64,7 +64,7 @@ class UserRetrieveAliasSer(serializers.ModelSerializer):
 class UserPatchAliasSer(serializers.ModelSerializer):
     class Meta:
         model = Alias
-        exclude = ["id", "soft_deleted", "created_by", "user"]
+        exclude = ["id", "soft_deleted", "created_by", "user", "path"]
 
 
 class CreateAliasAttrSer(serializers.Serializer):
@@ -96,3 +96,18 @@ class Attrs(serializers.Serializer):
         datas = [ValueAilasValue(**i) for i in attrs]
         aa = ValueAilasValue.objects.bulk_create(datas)
         return 200
+
+
+class ChangePathSer(serializers.ModelSerializer):
+    class Meta:
+        model = Alias
+        fields = ["path"]
+
+    def validate(self, data):
+        path = data.get("path", None)
+        if Alias.objects.is_existed_custom_path(path=path):
+            raise serializers.ValidationError("existed")
+        return data
+
+    def update(self, instance, validated_data):
+        super(ChangePathSer, self).update(instance, validated_data)

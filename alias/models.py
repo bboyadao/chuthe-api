@@ -29,7 +29,12 @@ class Alias(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     soft_deleted = models.BooleanField(null=True, default=False)
     socialaccount = models.ManyToManyField(SocialAccount)
-    contact = models.ForeignKey("alias.ContactInformation", on_delete=models.CASCADE, null=True, blank=True)
+    contact = models.ForeignKey(
+        "alias.ContactInformation",
+        on_delete=models.CASCADE,
+        null=True, blank=True,
+        default=None
+    )
 
     def get_absolute_url(self):
         return reverse_lazy("user_alias-detail", self.path)

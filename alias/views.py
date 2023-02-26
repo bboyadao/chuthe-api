@@ -9,8 +9,9 @@ from rest_framework import status
 from alias.docs import alias_docs
 from alias.models import Alias
 from alias.paging import AliasUserPagination
-from alias.permissions import ThemSelf
-from alias.serializers import UserCreateAliasSer, UserRetrieveAliasSer, UserPatchAliasSer, UserListAliasSer, Attrs
+from alias.permissions import ThemSelf, PaidMember
+from alias.serializers import UserCreateAliasSer, UserRetrieveAliasSer, UserPatchAliasSer, UserListAliasSer, Attrs, \
+    ChangePathSer
 from django.conf import settings
 
 loger = settings.LOGGER
@@ -31,6 +32,13 @@ class UserAlias(viewsets.ModelViewSet):
         if serializer.is_valid(raise_exception=True):
             obj = serializer.create()
         return Response({"ok": "ok"})
+
+    @action(methods=["patch", "get", 'options'], detail=True, permission_classes=[ThemSelf, PaidMember])
+    def change_path(self, *args, **kwargs):
+        serializer = self.get_serializer(data=self.request.data)
+        if serializer.is_valid(raise_exception=True):
+            obj = serializer.update(self.get_object(), serializer.data)
+        return Response(status.HTTP_200_OK)
 
     def update(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -56,6 +64,8 @@ class UserAlias(viewsets.ModelViewSet):
             case "partial_update":
                 return UserPatchAliasSer
             case "attrs": return Attrs
+            case "change_path": return ChangePathSer
+
             case _: return UserRetrieveAliasSer
 
 

@@ -4,6 +4,11 @@ import uuid
 
 class AliasManager(models.Manager):
 
+    def is_existed_custom_path(self, path):
+        if self.filter(path=path).exists():
+            return True
+        return False
+
     def gen_alias_id(self, obj):
         user_pk = None
         if isinstance(obj, dict):
