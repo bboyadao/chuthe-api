@@ -6,7 +6,7 @@ from chuthe.roles import Privacy
 from docs.utils import get_md_docs
 
 INSTRUCTION = "INSTRUCTION"
-sub_instruction = ["Overview", "Define"]
+sub_instruction = ["Overview", "Define", "Const"]
 
 urlpatterns = [
     path("", SpectacularRedocView.as_view(), name="redoc"),
@@ -28,6 +28,10 @@ urlpatterns = [
                     {
                         "name": Privacy.USER,
                         "tags": settings.DOCS_TAG[Privacy.USER.value],
+                    },
+{
+                        "name": Privacy.ALIAS,
+                        "tags": settings.DOCS_TAG[Privacy.ALIAS.value],
                     },
                     {
                         "name": Privacy.PUBLIC,

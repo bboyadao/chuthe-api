@@ -1,8 +1,7 @@
 from allauth.socialaccount.providers import registry
-from django.conf import settings
 from django.utils.translation import gettext as _
 from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiResponse
 from drf_spectacular.utils import extend_schema_view, OpenApiParameter, OpenApiExample
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -11,9 +10,6 @@ from rest_framework.response import Response
 from helpers import vn_banks, wallet_vn
 
 TAGS = ["Const", ]
-
-settings.DOCS_TAG["USER"].append(TAGS)
-
 docs_ = {
 	"retrieve": extend_schema(
 			parameters=[
@@ -49,7 +45,7 @@ docs_ = {
 
 			],
 			responses={
-				200: [OpenApiTypes.STR]
+				200: OpenApiResponse([1, 2, 3])
 			},
 
 			tags=TAGS,

@@ -201,10 +201,12 @@ SPECTACULAR_SETTINGS = {
 }
 
 DOCS_TAG = {
-    "ADMINSTRATOR": [],
+    "ADMINISTRATOR": [],
     "USER": [],
+    "ALIAS": [],
     "STAFF": [],
     "PUBLIC": [],
+
 }
 
 PUSH_NOTIFICATIONS_SETTINGS = {

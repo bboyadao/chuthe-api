@@ -7,7 +7,7 @@ from alias.serializers import UserCreateAliasSer, UserPatchAliasSer, UserRetriev
 
 TAGS = ["Alias", ]
 
-settings.DOCS_TAG["USER"].append(TAGS)
+settings.DOCS_TAG["ALIAS"].append(TAGS)
 
 alias_docs = {
 	"change_path": extend_schema(

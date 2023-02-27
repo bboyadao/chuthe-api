@@ -6,7 +6,7 @@ from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiParamet
 from alias.serializers import LinkSer
 
 TAGS = ["Payment"]
-settings.DOCS_TAG["USER"].append(TAGS)
+settings.DOCS_TAG["ALIAS"].append(TAGS)
 
 payment_docs = {
 	"create": extend_schema(
@@ -29,7 +29,7 @@ payment_docs = {
 		],
 		responses=LinkSer(many=True),
 		tags=TAGS,
-		operation_id=_("Payments".title()),
+		operation_id=_("PaymALIASents".title()),
 		description=_("List of links")
 	),
 

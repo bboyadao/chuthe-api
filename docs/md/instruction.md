@@ -8,7 +8,7 @@
 
    2. Define
 
-2. ADMINSTRATOR (Mechanic)
+2. ADMINISTRATOR (Mechanic)
 
 3. STAFF (For the customer service. Most are in admin dashboard)
 

@@ -6,7 +6,7 @@ from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiParamet
 from alias.serializers import LinkSer
 
 TAGS = ["Social"]
-settings.DOCS_TAG["USER"].append(TAGS)
+settings.DOCS_TAG["ALIAS"].append(TAGS)
 
 social_docs = {
 	"create": extend_schema(
