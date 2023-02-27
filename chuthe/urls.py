@@ -19,10 +19,8 @@ urlpatterns = [
 
     path("activity/", include('actstream.urls')),
 
-    # path('auth', include('dj_rest_auth.urls')),
     path('auth/', include('chuthe.auth.urls')),
     path('registry/', include('chuthe.auth.reg.urls')),
-    # path('registry/', include('dj_rest_auth.registration.urls')),
 
     path('devices/', FCMDeviceAuthorizedViewSet.as_view({'post': 'create'}), name='create_fcm_device'),
 

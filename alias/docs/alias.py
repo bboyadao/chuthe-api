@@ -2,13 +2,23 @@ from django.conf import settings
 from django.utils.translation import gettext as _
 from drf_spectacular.utils import extend_schema, OpenApiResponse
 
-from alias.serializers import UserCreateAliasSer, UserPatchAliasSer, UserRetrieveAliasSer, UserListAliasSer
+from alias.serializers import UserCreateAliasSer, UserPatchAliasSer, UserRetrieveAliasSer, UserListAliasSer, \
+	ChangePathSer
 
 TAGS = ["Alias", ]
 
 settings.DOCS_TAG["USER"].append(TAGS)
 
 alias_docs = {
+	"change_path": extend_schema(
+		request=ChangePathSer,
+		responses={
+			201: OpenApiResponse(response=None, description='Created with no content response'),
+		},
+		tags=TAGS,
+		operation_id=_("Change path premium".title()),
+		description=_("require: Premium member and User authenticated to create alias")
+	),
 	"create": extend_schema(
 		request=UserCreateAliasSer,
 		responses={

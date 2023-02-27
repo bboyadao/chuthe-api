@@ -32,15 +32,8 @@ class UserAlias(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     filterset_fields = ["created_at"]
     lookup_field = "path"
-    #
-    # @action(methods=["post", "get", 'options'], detail=True)
-    # def attrs(self, *args, **kwargs):
-    #     serializer = self.get_serializer(data=self.request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         obj = serializer.create()
-    #     return Response({"ok": "ok"})
 
-    @action(methods=["patch", "get", 'options'], detail=True, permission_classes=[ThemSelf, PaidMember])
+    @action(methods=["patch", 'options'], detail=True, permission_classes=[ThemSelf, PaidMember])
     def change_path(self, *args, **kwargs):
         serializer = self.get_serializer(data=self.request.data)
         if serializer.is_valid(raise_exception=True):
