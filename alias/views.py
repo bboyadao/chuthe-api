@@ -1,3 +1,4 @@
+from allauth.socialaccount.models import SocialAccount
 from rest_framework import filters
 
 from drf_spectacular.utils import extend_schema_view
@@ -7,11 +8,11 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from alias.docs import alias_docs
-from alias.models import Alias
-from alias.paging import AliasUserPagination
-from alias.permissions import ThemSelf, PaidMember
-from alias.serializers import UserCreateAliasSer, UserRetrieveAliasSer, UserPatchAliasSer, UserListAliasSer, Attrs, \
-    ChangePathSer
+from alias.models import Alias, PaymentInformation, Links, ContactInformation
+from alias.paging import AliasUserPagination, TinyPagination
+from alias.permissions import ThemSelf, PaidMember, Mine
+from alias.serializers import UserCreateAliasSer, UserRetrieveAliasSer, UserPatchAliasSer, UserListAliasSer, \
+    ChangePathSer, SocialAccountSer, ContactSer, LinkSer, PaymentInformationSer
 from django.conf import settings
 
 loger = settings.LOGGER
@@ -25,13 +26,13 @@ class UserAlias(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     filterset_fields = ["created_at"]
     lookup_field = "path"
-
-    @action(methods=["post", "get", 'options'], detail=True)
-    def attrs(self, *args, **kwargs):
-        serializer = self.get_serializer(data=self.request.data)
-        if serializer.is_valid(raise_exception=True):
-            obj = serializer.create()
-        return Response({"ok": "ok"})
+    #
+    # @action(methods=["post", "get", 'options'], detail=True)
+    # def attrs(self, *args, **kwargs):
+    #     serializer = self.get_serializer(data=self.request.data)
+    #     if serializer.is_valid(raise_exception=True):
+    #         obj = serializer.create()
+    #     return Response({"ok": "ok"})
 
     @action(methods=["patch", "get", 'options'], detail=True, permission_classes=[ThemSelf, PaidMember])
     def change_path(self, *args, **kwargs):
@@ -63,9 +64,51 @@ class UserAlias(viewsets.ModelViewSet):
                 return UserListAliasSer
             case "partial_update":
                 return UserPatchAliasSer
-            case "attrs": return Attrs
+
             case "change_path": return ChangePathSer
 
             case _: return UserRetrieveAliasSer
 
 
+class SocialView(viewsets.ModelViewSet):
+    serializer_class = SocialAccountSer
+    queryset = SocialAccount.objects.filter()
+    permission_classes = [Mine, ]
+    pagination_class = TinyPagination
+
+    def get_queryset(self):
+        a = Alias.objects.get(path=self.kwargs.get("user_alias_path"))
+        return a.socials.all().order_by("id")
+
+
+class PaymentView(viewsets.ModelViewSet):
+    serializer_class = PaymentInformationSer
+    queryset = PaymentInformation.objects.filter()
+    permission_classes = [Mine, ]
+    pagination_class = TinyPagination
+
+    def get_queryset(self):
+        a = Alias.objects.get(path=self.kwargs.get("user_alias_path"))
+        return a.payments.all().order_by("id")
+
+
+class ContactView(viewsets.ModelViewSet):
+    serializer_class = ContactSer
+    queryset = ContactInformation.objects.filter()
+    permission_classes = [Mine, ]
+    pagination_class = TinyPagination
+
+    def get_queryset(self):
+        a = Alias.objects.get(path=self.kwargs.get("user_alias_path"))
+        return a.contacts.all().order_by("id")
+
+
+class LinkView(viewsets.ModelViewSet):
+    serializer_class = LinkSer
+    queryset = Links.objects.filter()
+    permission_classes = [Mine, ]
+    pagination_class = TinyPagination
+
+    def get_queryset(self):
+        a = Alias.objects.get(path=self.kwargs.get("user_alias_path"))
+        return a.links.all().order_by("id")

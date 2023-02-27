@@ -1,6 +1,20 @@
 from allauth.socialaccount.models import SocialAccount
 from rest_framework import serializers
-from alias.models import Alias, ValueAilasValue, ContactInformation, Links
+from alias.models import Alias, ContactInformation, Links, PaymentInformation, PaymentBrand
+
+
+class PaymentBrandSer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentBrand
+        fields = "__all__"
+
+
+class PaymentInformationSer(serializers.ModelSerializer):
+    infor = PaymentBrandSer(source="dst")
+
+    class Meta:
+        model = PaymentInformation
+        fields = "__all__"
 
 
 class LinksSer(serializers.ModelSerializer):
@@ -50,52 +64,23 @@ class UserRetrieveAliasSer(serializers.ModelSerializer):
             "default",
             "socials",
             "contact",
+            "payments",
             "links",
             "created_at",
             "created_by",
         ]
         lookup_field = "path"
 
-    socials = SocialAccountSer(many=True, read_only=True, source="socialaccount")
+    socials = SocialAccountSer(many=True, read_only=True)
     contact = ContactInformationSer(read_only=True)
-    links = LinksSer(read_only=True, many=True, source="links_set")
+    links = LinksSer(read_only=True, many=True)
+    payments = PaymentInformationSer(many=True, read_only=True)
 
 
 class UserPatchAliasSer(serializers.ModelSerializer):
     class Meta:
         model = Alias
         exclude = ["id", "soft_deleted", "created_by", "user", "path"]
-
-
-class CreateAliasAttrSer(serializers.Serializer):
-    custom_key = serializers.CharField(required=False, allow_null=True)
-    key_id = serializers.IntegerField(required=False, allow_null=True)
-    value = serializers.CharField()
-
-    def validate_key(self, key):
-        if key not in ValueAilasValue.KeyAttr.values:
-            raise serializers.ValidationError("System not support this type")
-        return key
-
-    def validate(self, data):
-        key = data.get("key")
-        custom_key = data.get("custom_key")
-        if custom_key and key:
-            raise serializers.ValidationError("not both")
-        return data
-
-
-class Attrs(serializers.Serializer):
-    attrs = serializers.ListSerializer(child=CreateAliasAttrSer())
-
-    def validate_attrs(self, attrs):
-        return attrs
-
-    def create(self):
-        attrs = self.validated_data.get("attrs")
-        datas = [ValueAilasValue(**i) for i in attrs]
-        aa = ValueAilasValue.objects.bulk_create(datas)
-        return 200
 
 
 class ChangePathSer(serializers.ModelSerializer):
@@ -111,3 +96,15 @@ class ChangePathSer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         super(ChangePathSer, self).update(instance, validated_data)
+
+
+class ContactSer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactInformation
+        fields = "__all__"
+
+
+class LinkSer(serializers.ModelSerializer):
+    class Meta:
+        model = Links
+        fields = "__all__"
