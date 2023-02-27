@@ -142,8 +142,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 USER_TIME_ZONE = "Asia/Ho_Chi_Minh"
 
-# LANGUAGE_CODE = "en-us"
-LANGUAGE_CODE = 'vi'
+LANGUAGE_CODE = "en-us"
+# LANGUAGE_CODE = 'vi'
 
 TIME_ZONE = "UTC"
 
