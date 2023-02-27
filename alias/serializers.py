@@ -1,4 +1,6 @@
 from allauth.socialaccount.models import SocialAccount
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 from alias.models import Alias, ContactInformation, Links, PaymentInformation, PaymentBrand
 
@@ -33,6 +35,7 @@ class SocialAccountSer(serializers.ModelSerializer):
     provider_id = serializers.CharField(source="provider")
     name = serializers.SerializerMethodField()
 
+    @extend_schema_field(OpenApiTypes.STR)
     def get_name(self, ins):
         return ins.get_provider_display()
 
@@ -80,7 +83,9 @@ class UserRetrieveAliasSer(serializers.ModelSerializer):
 class UserPatchAliasSer(serializers.ModelSerializer):
     class Meta:
         model = Alias
-        exclude = ["id", "soft_deleted", "created_by", "user", "path"]
+        exclude = ["id", "soft_deleted", "created_by", "user", "path", "socials", "payments", "links", "contacts", "created_at"]
+
+    name = serializers.CharField(required=False)
 
 
 class ChangePathSer(serializers.ModelSerializer):

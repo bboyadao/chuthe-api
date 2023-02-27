@@ -1,13 +1,19 @@
 from allauth.socialaccount.models import SocialAccount
+from drf_spectacular.types import OpenApiTypes
 from rest_framework import filters
 
-from drf_spectacular.utils import extend_schema_view
+from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 
-from alias.docs import alias_docs
+from alias.docs.alias import alias_docs
+from alias.docs.contact import contact_docs
+from alias.docs.link import link_docs
+from alias.docs.payment import payment_docs
+from alias.docs.social import social_docs
+
 from alias.models import Alias, PaymentInformation, Links, ContactInformation
 from alias.paging import AliasUserPagination, TinyPagination
 from alias.permissions import ThemSelf, PaidMember, Mine
@@ -70,6 +76,9 @@ class UserAlias(viewsets.ModelViewSet):
             case _: return UserRetrieveAliasSer
 
 
+@extend_schema(
+    parameters=[OpenApiParameter(name="user_alias_path", type=OpenApiTypes.STR, location=OpenApiParameter.PATH)])
+@extend_schema_view(**social_docs)
 class SocialView(viewsets.ModelViewSet):
     serializer_class = SocialAccountSer
     queryset = SocialAccount.objects.filter()
@@ -81,6 +90,9 @@ class SocialView(viewsets.ModelViewSet):
         return a.socials.all().order_by("id")
 
 
+@extend_schema(
+    parameters=[OpenApiParameter(name="user_alias_path", type=OpenApiTypes.STR, location=OpenApiParameter.PATH)])
+@extend_schema_view(**payment_docs)
 class PaymentView(viewsets.ModelViewSet):
     serializer_class = PaymentInformationSer
     queryset = PaymentInformation.objects.filter()
@@ -92,6 +104,9 @@ class PaymentView(viewsets.ModelViewSet):
         return a.payments.all().order_by("id")
 
 
+@extend_schema(
+    parameters=[OpenApiParameter(name="user_alias_path", type=OpenApiTypes.STR, location=OpenApiParameter.PATH)])
+@extend_schema_view(**contact_docs)
 class ContactView(viewsets.ModelViewSet):
     serializer_class = ContactSer
     queryset = ContactInformation.objects.filter()
@@ -103,6 +118,9 @@ class ContactView(viewsets.ModelViewSet):
         return a.contacts.all().order_by("id")
 
 
+@extend_schema(
+    parameters=[OpenApiParameter(name="user_alias_path", type=OpenApiTypes.STR, location=OpenApiParameter.PATH)])
+@extend_schema_view(**link_docs)
 class LinkView(viewsets.ModelViewSet):
     serializer_class = LinkSer
     queryset = Links.objects.filter()

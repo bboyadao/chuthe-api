@@ -1,11 +1,12 @@
 from drf_spectacular.utils import extend_schema_view
 from rest_framework import viewsets, permissions
 
-from alias.docs import manage_alias_docs
 from alias.models import Alias
 from alias.paging import AliasUserPagination
 from alias.serializers import UserCreateAliasSer, UserRetrieveAliasSer, UserPatchAliasSer
 from rest_framework import filters
+
+from manager.docs.alias import manage_alias_docs
 
 
 @extend_schema_view(**manage_alias_docs)
