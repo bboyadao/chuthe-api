@@ -19,23 +19,23 @@ urlpatterns = [
                      "tags": sub_instruction},
                     {
                         "name": Privacy.ADMIN,
-                        "tags": settings.DOCS_TAG[Privacy.ADMIN.value],
+                        "tags": settings.DOCS_GROUP[Privacy.ADMIN.value],
                     },
                     {
                         "name": Privacy.STAFF,
-                        "tags": settings.DOCS_TAG[Privacy.STAFF.value],
+                        "tags": settings.DOCS_GROUP[Privacy.STAFF.value],
                     },
                     {
                         "name": Privacy.USER,
-                        "tags": settings.DOCS_TAG[Privacy.USER.value],
+                        "tags": settings.DOCS_GROUP[Privacy.USER.value],
                     },
 {
                         "name": Privacy.ALIAS,
-                        "tags": settings.DOCS_TAG[Privacy.ALIAS.value],
+                        "tags": settings.DOCS_GROUP[Privacy.ALIAS.value],
                     },
                     {
                         "name": Privacy.PUBLIC,
-                        "tags": settings.DOCS_TAG[Privacy.PUBLIC.value],
+                        "tags": settings.DOCS_GROUP[Privacy.PUBLIC.value],
                     },
 
                 ],

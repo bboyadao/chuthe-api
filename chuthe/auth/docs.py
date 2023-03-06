@@ -6,7 +6,7 @@ from django.conf import settings
 from chuthe.auth.serializers import ShitResponseSerialiser, LogoutRequestSerialiser
 
 TAG = "Auth"
-settings.DOCS_TAG["PUBLIC"].append(TAG)
+settings.DOCS_GROUP["PUBLIC"].append(TAG)
 login_docs = {
     "post": extend_schema(
         tags=[TAG],
@@ -33,7 +33,7 @@ reset_password_docs = {
     ),
 }
 TAG = "Account"
-settings.DOCS_TAG["USER"].append(TAG)
+settings.DOCS_GROUP["USER"].append(TAG)
 logout_docs = {
     "post": extend_schema(
         tags=[TAG],

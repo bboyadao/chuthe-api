@@ -6,7 +6,7 @@ from user.serializers import UserSettingSer
 
 TAGS = ["User Settings"]
 
-settings.DOCS_TAG["USER"].append(TAGS)
+settings.DOCS_GROUP["USER"].append(TAGS)
 
 user_docs = {
 

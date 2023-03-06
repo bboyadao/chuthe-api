@@ -7,7 +7,7 @@ from django.conf import settings
 
 #  todo: not yet impl
 TAGS = ["Manage Alias"]
-settings.DOCS_TAG["STAFF"].append(TAGS)
+settings.DOCS_GROUP["STAFF"].append(TAGS)
 manage_alias_docs = {
     "create": extend_schema(
         # auth=[None],

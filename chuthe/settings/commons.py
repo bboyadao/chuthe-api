@@ -200,7 +200,7 @@ SPECTACULAR_SETTINGS = {
 
 }
 
-DOCS_TAG = {
+DOCS_GROUP = {
     "ADMINISTRATOR": [],
     "USER": [],
     "ALIAS": [],
