@@ -20,7 +20,7 @@ endif # $J
 default: mk mi cac su mock
 lib:
 	docker build -t chuthe_lib:latest -f Dockerfile.lib .
-	docker tag chuthe_lib:latest 0x7c/teams_lib:latest
+	docker tag chuthe_lib:latest 0x7c/chuthe_lib:latest
 	docker push 0x7c/chuthe_lib:latest
 b:
 	docker build -t chuthe:latest -f Dockerfile .
