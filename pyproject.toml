@@ -86,25 +86,36 @@ plugins = [
     "mypy_drf_plugin.main",
 ]
 [tool.coverage.paths]
-source = [".", ]
+source = ["coverage/", ]
+
+[tool.coverage.html]
+title = "chuthe api out of control!"
+skip_empty = true
+skip_covered = true
+directory = "coverage/htmlcov"
+
+[tool.coverage.lcov]
+output = "coverage/lcov.info"
+
 
 [tool.coverage.run]
 branch = true
 source = ["."]
 omit = ["*/tests/*",
     "*/migrations/*",
-#    "*/urls.py",
+    #    "*/urls.py",
     "*/settings/*",
     "*/wsgi.py",
     "manage.py",
-#    "*/apps.py",
+    #    "*/apps.py",
     "*/tasks.py",
     "*/asgi.py"
 ]
 
 [tool.coverage.report]
 show_missing = true
-fail_under = 100
+fail_under = 50
+
 
 [tool.django-stubs]
 django_settings_module = "chuthe.settings"

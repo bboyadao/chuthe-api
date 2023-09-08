@@ -1,14 +1,18 @@
-from django.urls import re_path
+from django.urls import re_path, include
 from django.views.generic import TemplateView
 
-from chuthe.auth.reg.views import RegisterView, VerifyEmailView, ResendEmailVerificationView, GoogleLogin
+from chuthe.auth.reg.views import RegisterView, VerifyEmailView, ResendEmailVerificationView, GoogleLogin, \
+    LinkedinConnect, GithubConnect
 from django.urls import path
 
 urlpatterns = [
     path('', RegisterView.as_view(), name='rest_register'),
 
     path("google/", GoogleLogin.as_view(), name="google_login"),
-
+    path("linkedin/", LinkedinConnect.as_view(), name="linkedin_login"),
+    path("facebook/", GoogleLogin.as_view(), name="facebook_login"),
+    path("github/", GithubConnect.as_view(), name="github_login"),
+    path("social/", include("allauth.socialaccount.urls")),
     path('verify-email/', VerifyEmailView.as_view(), name='rest_verify_email'),
     path('resend-email/', ResendEmailVerificationView.as_view(), name="rest_resend_email"),
 

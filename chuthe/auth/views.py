@@ -1,7 +1,12 @@
+from dj_rest_auth.registration.views import RegisterView as RegisterViewDefault
 from dj_rest_auth.views import LoginView as LV, LogoutView as LO, PasswordChangeView as PC, PasswordResetConfirmView as PRC, PasswordResetView as PRV, UserDetailsView as UDV  # noqa
 from drf_spectacular.utils import extend_schema_view
 
 from chuthe.auth import docs
+
+
+class RegisterView(RegisterViewDefault):
+    pass
 
 
 @extend_schema_view(**docs.login_docs)

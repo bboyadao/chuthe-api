@@ -3,7 +3,7 @@ from django.urls import path
 
 from chuthe.auth.views import (
     LoginView, LogoutView, PasswordChangeView, PasswordResetConfirmView,
-    PasswordResetView, UserDetailsView,
+    PasswordResetView, UserDetailsView, RegisterView,
 )
 
 app_name = "auth"
@@ -17,6 +17,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='rest_logout'),
     path('user/', UserDetailsView.as_view(), name='rest_user_details'),
     path('password/change/', PasswordChangeView.as_view(), name='rest_password_change'),
+    path('register/', RegisterView.as_view(), name='rest_register'),
 ]
 
 if getattr(settings, 'REST_USE_JWT', False):

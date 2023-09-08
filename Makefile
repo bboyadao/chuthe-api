@@ -1,5 +1,27 @@
-default: mk mi cac su mock
+MAKEFLAGS += -rR --no-print-directory
 
+NPROCS := 1
+OS := $(shell uname)
+export NPROCS
+
+ifeq ($J,)
+
+ifeq ($(OS),Linux)
+  NPROCS := $(shell grep -c ^processor /proc/cpuinfo)
+else ifeq ($(OS),Darwin)
+  NPROCS := $(shell system_profiler | awk '/Number of CPUs/ {print $$4}{next;}')
+endif # $(OS)
+
+else
+  NPROCS := $J
+endif # $J
+
+
+default: mk mi cac su mock
+lib:
+	docker build -t chuthe_lib:latest -f Dockerfile.lib .
+	docker tag chuthe_lib:latest 0x7c/teams_lib:latest
+	docker push 0x7c/chuthe_lib:latest
 b:
 	docker build -t chuthe:latest -f Dockerfile .
 	docker tag chuthe:latest 0x7c/chuthe:latest
@@ -48,3 +70,16 @@ worker:
 
 dr:
 	docker run --rm -ti -p 9000:9000 agrifile:latest
+
+u:
+	python manage.py show_urls
+mo:
+	python manage.py compilemessages
+
+po:
+	python manage.py makemessages --all
+t:
+	python manage.py makemigrations --dry-run | grep 'No changes detected' || (echo 'There are changes which require migrations. Please run migration first.' && exit 1)
+	coverage erase && coverage run --concurrency=multiprocessing manage.py test --parallel $(NPROCS) --verbosity 2 && coverage combine && coverage html && coverage lcov && coverage report -m
+cov:
+	coverage combine && coverage html && coverage lcov && coverage report -m

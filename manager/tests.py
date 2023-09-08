@@ -19,6 +19,7 @@ class TestPermTests(APITestCase):
             'password': password
         }
         response = self.client.post(url, body)
+        print(response.data)
         token = response.data['access_token']
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
         self.user = User.objects.get(username=username)

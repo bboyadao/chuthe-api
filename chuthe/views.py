@@ -21,8 +21,7 @@ docs_ = {
 							"banks",
 							"wallet",
 						],
-						description='Return a list of results no paging! '
-						            'simple: <domain.com>/const/?name=providers',
+						description='Return a list of results no paging! simple: <domain.com>/const/?name=providers',
 						examples=[
 							OpenApiExample(
 									'Example 1',
